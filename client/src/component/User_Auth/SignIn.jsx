@@ -4,7 +4,7 @@ import "./SignIn.scss";
 import image from "../../assets/User_Auth/login1.svg";
 import brand from "../../assets/User_Auth/brand.png";
 import axios from "axios";
-import { Slide, toast, ToastContainer } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
@@ -13,6 +13,45 @@ const SignIn = () => {
   let [password, setpassword] = useState("");
   let [loader, setLoader] = useState(false);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let data = {
+      email,
+      password,
+    };
+    setLoader(true);
+    await axios
+      .post("http://localhost:3001/auth/login", data)
+      .then((res) => {
+        console.log(res);
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setLoader(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setLoader(false);
+      });
+  }
   return (
     <>
       <div className="signin_container">
@@ -37,7 +76,7 @@ const SignIn = () => {
               <h4>Welcome Back!</h4>
               <p>Please enter login details below</p>
             </div>
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <div className="form_group">
                 <label htmlFor="email">
                   Email{" "}

@@ -28,7 +28,7 @@
 .signin_container {
   width: 100vw;
   height: 100dvh;
-  // background-image: url(../../assets/Background/21.jpg);
+  background-image: url(../../assets/Background/21.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -40,7 +40,7 @@
   font-style: normal;
   align-items: center;
   justify-content: flex-start;
-  flex-direction: column;
+  flex-direction: column; 
   overflow: hidden;
 
   .brand_logo{
@@ -253,7 +253,7 @@
             gap: 3px;
             position: absolute;
             padding: 0px 5px;
-            top: -12px;
+            top: -18px;
             left: 15%;
             color: gray;
             font-weight: 550;
@@ -575,8 +575,8 @@
 
 //LOaders::after
 .loader {
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
   display: inline-block;
   position: relative;
   border-radius: 4px;
@@ -602,3 +602,40 @@
     box-shadow: 20px -10px, 40px 10px, 60px 0px;
   }
 }
+
+
+//Loader styles:
+.loader, .loader:before, .loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: bblFadInOut 1.8s infinite ease-in-out;
+}
+.loader {
+  color: #5ee443;
+  font-size: 3px;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+
+@keyframes bblFadInOut {
+  0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em }
+  40% { box-shadow: 0 2.5em 0 0 }
+}
+    

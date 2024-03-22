@@ -5,21 +5,67 @@ import signup from "../../assets/User_Auth/register2.svg";
 import brand from "../../assets/User_Auth/brand.png";
 import illustration from "../../assets/Background/register_illustrator.svg";
 import axios from "axios";
-import { Slide, toast, ToastContainer } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   let navigate = useNavigate();
-  //Image store state :
-  let [profile, setProfile] = useState();
+
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [location, setLocation] = useState("");
-  let [mobile, setMobile] = useState("");
+  let [mobileNumber, setMobileNumber] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [loader1, setLoader1] = useState(false);
+  let [loader, setLoader] = useState(false);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoader(true);
+    let data = {
+      firstName,
+      lastName,
+      email,
+      password,
+      location,
+      mobileNumber,
+    };
+  await  axios
+      .post("http://localhost:3001/auth/register", data)
+      .then((res) => {
+        console.log(res);
+        setLoader(false);
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+        setLoader(false);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      });
+  }
   return (
     <>
       <div className="signup_container">
@@ -44,22 +90,7 @@ const SignUp = () => {
             <div className="illustration">
               <img src={illustration} alt="illustration" />
             </div>
-            <form action="">
-              {/* <div className="profile">
-                <label htmlFor="profile">
-                  <img
-                    src={profile || avatar}
-                    alt="avatar"
-                    id="profile_image"
-                  />
-                </label>
-                <input
-                  // onChange={onUpload}
-                  type="file"
-                  id="profile"
-                  name="profile"
-                />
-              </div> */}
+            <form action="" onSubmit={handleSubmit}>
               {/* //First Name */}
               <div className="form_group">
                 <label htmlFor="userName">
@@ -84,9 +115,7 @@ const SignUp = () => {
               <div className="form_group">
                 <label htmlFor="lastName">
                   LastName{" "}
-                  <span>
-                    <sup>*</sup>
-                  </span>
+                
                 </label>
                 <input
                   type="text"
@@ -109,7 +138,7 @@ const SignUp = () => {
                   </span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Eg : abc@gmail.com"
                   name="email"
                   id="email"
@@ -163,8 +192,8 @@ const SignUp = () => {
                   placeholder="Eg : +91 6576579679"
                   name="mobile"
                   id="mobile"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
+                  value={mobileNumber}
+                  onChange={(e) => setMobileNumber(e.target.value)}
                 />
                 <div className="icon">
                   <i className="bx bxs-user"></i>
@@ -174,11 +203,11 @@ const SignUp = () => {
               <div className="form_submit">
                 <button type="submit">
                   Register
-                  {loader1 ? (
+                  {loader ? (
                     <span className="loader"></span>
                   ) : (
                     <div className="rocket">
-                      <i className="bx bxs-rocket bx-flashing"></i>
+                      <i className="bx bx-log-in bx-flashing"></i>
                     </div>
                   )}
                 </button>
