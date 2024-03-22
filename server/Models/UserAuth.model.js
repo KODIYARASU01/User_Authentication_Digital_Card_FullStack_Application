@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 let UserAuthSchema = new mongoose.Schema(
   {
+    profile: {
+      type: String,
+      default:"https://www.vecteezy.com/png/28169693-3d-icons-occupation-job-avatar-for-social-media-profile-pictures",
+    },
     firstName: {
       type: String,
       required: true,

@@ -23,7 +23,6 @@ const SignIn = () => {
     await axios
       .post("http://localhost:3001/auth/login", data)
       .then((res) => {
-        console.log(res);
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 2000,
@@ -66,6 +65,12 @@ const SignIn = () => {
           <img src={brand} alt="brand" />
 
           <p>Virtual Card Creations</p>
+
+          {/* <i
+            className="bx bxl-sketch bx-flip-horizontal bx-fade-up"
+            style={{ color: "#58dec9" }}
+          ></i> */}
+          <i className='bx bxl-sketch bx-burst bx-flip-horizontal' style={{ color: "#58dec9" }}></i>
         </div>
         <div className="box_container">
           <div className="left_image">

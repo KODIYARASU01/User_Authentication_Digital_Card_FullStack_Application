@@ -30,7 +30,7 @@ const SignUp = () => {
       location,
       mobileNumber,
     };
-  await  axios
+    await axios
       .post("http://localhost:3001/auth/register", data)
       .then((res) => {
         console.log(res);
@@ -80,6 +80,10 @@ const SignUp = () => {
           <img src={brand} alt="brand" />
 
           <p>Virtual Card Creations</p>
+          <i
+            className="bx bxl-sketch bx-burst bx-flip-horizontal"
+            style={{ color: "#58dec9" }}
+          ></i>
         </div>
         <div className="box_container">
           <div className="right_form">
@@ -113,10 +117,7 @@ const SignUp = () => {
               </div>
               {/* //Last Name */}
               <div className="form_group">
-                <label htmlFor="lastName">
-                  LastName{" "}
-                
-                </label>
+                <label htmlFor="lastName">LastName </label>
                 <input
                   type="text"
                   placeholder="Eg : Kumar or K"
@@ -126,7 +127,7 @@ const SignUp = () => {
                   onChange={(e) => setLastName(e.target.value)}
                 />
                 <div className="icon">
-                  <i className="bx bxs-user"></i>
+                  <i className="bx bxs-user-pin"></i>
                 </div>
               </div>
               {/* Email`` */}
@@ -181,7 +182,7 @@ const SignUp = () => {
                   onChange={(e) => setLocation(e.target.value)}
                 />
                 <div className="icon">
-                  <i className="bx bxs-user"></i>
+                  <i className="bx bx-current-location bx-rotate-90"></i>
                 </div>
               </div>
               {/* MobileNumber`` */}
@@ -196,7 +197,7 @@ const SignUp = () => {
                   onChange={(e) => setMobileNumber(e.target.value)}
                 />
                 <div className="icon">
-                  <i className="bx bxs-user"></i>
+                  <i className="bx bx-mobile"></i>
                 </div>
               </div>
 

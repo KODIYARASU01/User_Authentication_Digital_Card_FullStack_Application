@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 //Import userAuth Routes:
 import UserAuthRoute from "./Routes/UserAuth.route.js";
+import UserDataRoute from './Routes/UserData.route.js';
 dotenv.config();
 let app = express();
 
@@ -21,6 +22,7 @@ app.use(cors());
 
 //All Routes:
 app.use("/auth", UserAuthRoute);
+app.use('/userData',UserDataRoute)
 
 app.get("/", (req, res) => {
   res.send("Server is running");
