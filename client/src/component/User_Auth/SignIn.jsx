@@ -32,7 +32,7 @@ const SignIn = () => {
     };
     setLoader(true);
     await axios
-      .post("http://localhost:3001/auth/login", data)
+      .post("https://user-authentication-fullstack-application.onrender.com/auth/login", data)
       .then((res) => {
         console.log(res.data);
 

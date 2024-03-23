@@ -17,7 +17,7 @@ const UserDetail = () => {
     setLoader(true)
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:3001/userData/${id}`, {
+      .get(`https://user-authentication-fullstack-application.onrender.com/userData/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -102,7 +102,7 @@ const UserDetail = () => {
         mobileNumber,
       };
       axios
-        .put(`http://localhost:3001/userData/${id}`, data, {
+        .put(`https://user-authentication-fullstack-application.onrender.com/userData/${id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -147,7 +147,7 @@ const UserDetail = () => {
       setLoader(true)
       const token = localStorage.getItem("token");
       axios
-        .delete(`http://localhost:3001/auth/logout`,{
+        .delete(`https://user-authentication-fullstack-application.onrender.com/auth/logout`,{
           headers: {
             Authorization: `Bearer ${token}`,
           },

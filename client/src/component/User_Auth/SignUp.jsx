@@ -51,7 +51,7 @@ const SignUp = () => {
       mobileNumber,
     };
     await axios
-      .post("http://localhost:3001/auth/register", data)
+      .post("https://user-authentication-fullstack-application.onrender.com/auth/register", data)
       .then((res) => {
         console.log(res);
         setLoader(false);
