@@ -9,10 +9,21 @@ import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
   let navigate = useNavigate();
+  let [show, setShow] = useState(false);
   let [email, setEmail] = useState("");
   let [password, setpassword] = useState("");
   let [loader, setLoader] = useState(false);
 
+  //Password Show hide :
+  let handleShow = () => {
+    let password = document.getElementById("password");
+    setShow(!show);
+    {
+      !show
+        ? password.setAttribute("type", "text")
+        : password.setAttribute("type", "password");
+    }
+  };
   async function handleSubmit(e) {
     e.preventDefault();
     let data = {
@@ -23,6 +34,11 @@ const SignIn = () => {
     await axios
       .post("http://localhost:3001/auth/login", data)
       .then((res) => {
+        console.log(res.data);
+
+        let token = res.data.Token;
+        console.log(token);
+        localStorage.setItem("token", token);
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 2000,
@@ -34,6 +50,9 @@ const SignIn = () => {
           theme: "light",
           transition: Bounce,
         });
+        setTimeout(() => {
+          navigate(`/user-detail/${res.data.User._id}`);
+        }, 2000);
         setLoader(false);
       })
       .catch((error) => {
@@ -48,6 +67,7 @@ const SignIn = () => {
           theme: "light",
           transition: Bounce,
         });
+
         setLoader(false);
       });
   }
@@ -70,7 +90,10 @@ const SignIn = () => {
             className="bx bxl-sketch bx-flip-horizontal bx-fade-up"
             style={{ color: "#58dec9" }}
           ></i> */}
-          <i className='bx bxl-sketch bx-burst bx-flip-horizontal' style={{ color: "#58dec9" }}></i>
+          <i
+            className="bx bxl-sketch bx-burst bx-flip-horizontal"
+            style={{ color: "#58dec9" }}
+          ></i>
         </div>
         <div className="box_container">
           <div className="left_image">
@@ -118,6 +141,13 @@ const SignIn = () => {
                 />
                 <div className="icon">
                   <i className="bx bxs-lock-open"></i>
+                </div>
+                <div className="show_pass" onClick={handleShow}>
+                  {!show ? (
+                    <i className="bx bx-low-vision"></i>
+                  ) : (
+                    <i className="bx bxs-show"></i>
+                  )}
                 </div>
               </div>
               <div className="forgot_password">

@@ -240,13 +240,14 @@
         margin: 1rem auto;
 
         .form_group {
+          position: relative;
           margin: 10px auto;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           width: 100%;
-          position: relative;
+ 
           margin: 1rem;
 
           label {
@@ -280,6 +281,7 @@
           }
 
           input {
+       
             width: 80%;
             padding: 1rem 2rem;
             // border: 2px solid rgb(177, 238, 128);
@@ -333,7 +335,23 @@
               top: 25%;
             }
           }
-          
+          .show_pass {
+            position: absolute;
+            right: 15%;
+            top: 25%;
+
+            i {
+              font-size: 1.4rem;
+              color: rgb(69, 255, 109);
+              cursor: pointer;
+            }
+
+            @media screen and (max-width: 800px) {
+              position: absolute;
+              right: 2%;
+              top: 25%;
+            }
+          }
           @media screen and (max-width:900px){
             margin: 0.8rem auto;
           }
@@ -359,13 +377,14 @@
           width: 100%;
           margin: 1rem auto;
           display: flex;
+          grid-column: 1/-1; 
           align-items: center;
           justify-content: center;
           position: relative;
 
           button {
             position: relative;
-            width: 70%;
+            width: 50%;
             padding: 0.9rem 2rem;
             outline: none;
             border: transparent;
@@ -378,24 +397,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 2rem;
             transition: all 0.2s ease-in-out;
 
-            .rocket {
-              position: absolute;
-              left: 7%;
-
-              i {
-                font-size: 1.5rem;
-                color: rgb(135, 250, 125);
-              }
-            }
+         
             &:hover {
-              
+             
               background-color: royalblue;
               transition: all 0.2s ease-in-out;
             }
-
             @media screen and (max-width: 700px) {
               width: 85%;
             }

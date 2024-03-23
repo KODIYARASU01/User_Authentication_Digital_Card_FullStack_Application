@@ -3,14 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.scss";
 import signup from "../../assets/User_Auth/register2.svg";
 import brand from "../../assets/User_Auth/brand.png";
+import profile_logo from "../../assets/User_Auth/profile.png";
 import illustration from "../../assets/Background/register_illustrator.svg";
 import axios from "axios";
+import { convertToBase64 } from "../Helper/Convert.js";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   let navigate = useNavigate();
-
+  let [show, setShow] = useState(false);
+  let [profile, setProfile] = useState();
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [location, setLocation] = useState("");
@@ -18,11 +21,28 @@ const SignUp = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [loader, setLoader] = useState(false);
+  //Formik does not support file upload so we could create handler :
+  const onUpload = async (e) => {
+    let base64 = await convertToBase64(e.target.files[0]);
 
+    setProfile(base64);
+  };
+
+  //Password Show hide :
+  let handleShow = () => {
+    let password = document.getElementById("password");
+    setShow(!show);
+    {
+      !show
+        ? password.setAttribute("type", "text")
+        : password.setAttribute("type", "password");
+    }
+  };
   async function handleSubmit(e) {
     e.preventDefault();
     setLoader(true);
     let data = {
+      profile,
       firstName,
       lastName,
       email,
@@ -87,6 +107,21 @@ const SignUp = () => {
         </div>
         <div className="box_container">
           <div className="right_form">
+            <div className="profile">
+              <label htmlFor="profile">
+                <img
+                  src={profile || profile_logo}
+                  alt="avatar"
+                  id="profile_image"
+                />
+              </label>
+              <input
+                onChange={onUpload}
+                type="file"
+                id="profile"
+                name="profile"
+              />
+            </div>
             <div className="form_title">
               <h4>Welcome to AristosTech Digital Card Creator!</h4>
               <p>Create your new Account</p>
@@ -168,6 +203,14 @@ const SignUp = () => {
                 />
                 <div className="icon">
                   <i className="bx bxs-lock"></i>
+                </div>
+
+                <div className="show_pass" onClick={handleShow}>
+                  {!show ? (
+                    <i className="bx bx-low-vision"></i>
+                  ) : (
+                    <i className="bx bxs-show"></i>
+                  )}
                 </div>
               </div>
               {/* //Location */}

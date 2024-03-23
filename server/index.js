@@ -15,10 +15,11 @@ let PORT = process.env.PORT || 3000;
 let uri = process.env.MONGODB_URI;
 
 //Middleware:
-app.use(express.json());
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+app.use(express.json({limit: '30mb'}));
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+
 
 //All Routes:
 app.use("/auth", UserAuthRoute);

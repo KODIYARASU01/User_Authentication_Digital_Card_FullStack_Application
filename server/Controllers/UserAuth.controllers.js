@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 //Registering data
 export const postRegister = async (req, res) => {
   try {
-    let { firstName, lastName, email, password, location, mobileNumber } =
+    let { firstName, lastName, email, password, location, mobileNumber,profile } =
       req.body;
     if (
       !req.body.firstName ||
@@ -30,6 +30,7 @@ export const postRegister = async (req, res) => {
       //Hashing our password:
       let hashingPassword = await bcrypt.hash(password, 10);
       let register = new UserAuth({
+        profile,
         firstName,
         lastName,
         email,
@@ -69,7 +70,7 @@ export const postLogin = async (req, res) => {
       return res.status(500).json({ message: "Wrong Credential" });
 
     //Creating Token :
-    let Token = jwt.sign({ id: User._id }, process.env.SECRET_JWT_KEY);
+    let Token = jwt.sign({ id: User._id }, process.env.SECRET_JWT_KEY, { expiresIn: '30d' });
     delete User.password;
     return res
       .status(201)
@@ -78,3 +79,18 @@ export const postLogin = async (req, res) => {
     res.status(501).json({ error: error.message });
   }
 };
+
+//LogoOut User
+
+// Route to logout (invalidate) a user token
+
+
+export const deleteUser= async (req, res) => {
+  // const token = req.headers['authorization'].split(' ')[1];
+  // if (!token) return res.status(401).json({ message: "No token provided" });
+
+  // // Add the token to the revoked tokens list
+  // await revokedTokens.push(token);
+  
+  // res.status(200).json({ message: "Logout successful" });
+}
