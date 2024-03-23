@@ -220,18 +220,35 @@
       padding: 1rem;
       //   padding: 0.5rem 1rem;
 
-      // Profile logo
+   
+      .form_title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        position: relative;
+
+        h4 {
+          letter-spacing: 1px;
+          color: #000;
+        }
+        p {
+          font-size: 0.8rem;
+          color: rgb(104, 89, 238);
+        }
+           // Profile logo
       .profile {
         position: absolute;
-        top: 18%;
+        top: 40%;
         left: 44%;
 
         label {
           #profile_image {
-            min-width: 60px;
-            width: 60px;
-            min-height: 60px;
-            height: 60px;
+            min-width: 50px;
+            width: 50px;
+            min-height: 50px;
+            height: 50px;
             object-fit: cover;
             object-position: center;
             border-radius: 50%;
@@ -244,25 +261,10 @@
         }
         @media screen and (max-width: 900px) {
           position: absolute;
-          top: 14%;
+          top: 44%;
           left: 60%;
         }
       }
-      .form_title {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 10px;
-
-        h4 {
-          letter-spacing: 1px;
-          color: #000;
-        }
-        p {
-          font-size: 0.8rem;
-          color: rgb(104, 89, 238);
-        }
       }
       .illustration {
         position: absolute;

@@ -207,7 +207,11 @@ const UserDetail = () => {
         </div>
         <div className="box_container">
           <div className="right_form">
-          <div className="profile">
+         
+            <div className="form_title">
+              {/* <h4>Welcome to AristosTech Digital Card Creator!</h4> */}
+              <p>Update Your Account Details</p>
+              <div className="profile">
               <label htmlFor="profile">
                 <img src={profile || profile_logo} alt="avatar" id="profile_image" />
               </label>
@@ -218,9 +222,6 @@ const UserDetail = () => {
                 name="profile"
               />
             </div>
-            <div className="form_title">
-              {/* <h4>Welcome to AristosTech Digital Card Creator!</h4> */}
-              <p>Update Your Account Details</p>
             </div>
             {/* <div className="illustration">
               <img src={illustration} alt="illustration" />

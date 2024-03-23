@@ -107,7 +107,11 @@ const SignUp = () => {
         </div>
         <div className="box_container">
           <div className="right_form">
-            <div className="profile">
+           
+            <div className="form_title">
+              <h4>Welcome to AristosTech Digital Card Creator!</h4>
+              <p>Create your new Account</p>
+              <div className="profile">
               <label htmlFor="profile">
                 <img
                   src={profile || profile_logo}
@@ -122,9 +126,6 @@ const SignUp = () => {
                 name="profile"
               />
             </div>
-            <div className="form_title">
-              <h4>Welcome to AristosTech Digital Card Creator!</h4>
-              <p>Create your new Account</p>
             </div>
             <div className="illustration">
               <img src={illustration} alt="illustration" />
