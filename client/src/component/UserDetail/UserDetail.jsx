@@ -13,15 +13,21 @@ const UserDetail = () => {
   let [UserDetail, setUserDetail] = useState([]);
   let [show, setShow] = useState(false);
   let { id } = useParams();
+
+  //Fetch userData
   useEffect(() => {
-    setLoader(true)
-    const token = localStorage.getItem("token");
+    setLoader(true);
+    let id = JSON.parse(localStorage.getItem("token"));
+
     axios
-      .get(`https://user-authentication-fullstack-application.onrender.com/userData/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        `https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        }
+      )
       .then((res) => {
         toast.success(res.data.message, {
           position: "top-right",
@@ -42,7 +48,7 @@ const UserDetail = () => {
         setPassword(res.data.getUserData.password);
         setMobileNumber(res.data.getUserData.mobileNumber);
         setProfile(res.data.getUserData.profile);
-        setLoader(false)
+        setLoader(false);
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
@@ -56,12 +62,12 @@ const UserDetail = () => {
           theme: "light",
           transition: Bounce,
         });
-        setLoader(false)
+        setLoader(false);
         console.log(error.message);
       });
   }, []);
   let navigate = useNavigate();
-  let[profile,setProfile]=useState()
+  let [profile, setProfile] = useState();
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [location, setLocation] = useState("");
@@ -70,12 +76,12 @@ const UserDetail = () => {
   let [password, setPassword] = useState("");
   let [loader, setLoader] = useState(false);
 
-    //Formik does not support file upload so we could create handler :
-    const onUpload = async (e) => {
-      let base64 = await convertToBase64(e.target.files[0]);
-  
-      setProfile(base64);
-    };
+  //Formik does not support file upload so we could create handler :
+  const onUpload = async (e) => {
+    let base64 = await convertToBase64(e.target.files[0]);
+
+    setProfile(base64);
+  };
   //Password Show hide :
   let handleShow = () => {
     let password = document.getElementById("password");
@@ -86,10 +92,11 @@ const UserDetail = () => {
         : password.setAttribute("type", "password");
     }
   };
+  //Update UserDetail
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       const token = localStorage.getItem("token");
 
       let data = {
@@ -102,11 +109,15 @@ const UserDetail = () => {
         mobileNumber,
       };
       axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/userData/${id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/userData/${id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
           toast.success(res.data.message, {
@@ -120,7 +131,7 @@ const UserDetail = () => {
             theme: "light",
             transition: Bounce,
           });
-          setLoader(false)
+          setLoader(false);
         })
         .catch((error) => {
           console.log(error.message);
@@ -135,55 +146,43 @@ const UserDetail = () => {
             theme: "light",
             transition: Bounce,
           });
-          setLoader(false)
+          setLoader(false);
         });
     } catch (error) {
       console.log(error.message);
     }
   };
-  let handleLogOut=async (e) => {
+  //LogOut user
+  let handleLogOut = async (e) => {
     e.preventDefault();
     try {
-      setLoader(true)
-      const token = localStorage.getItem("token");
-      axios
-        .delete(`https://user-authentication-fullstack-application.onrender.com/auth/logout`,{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          toast.success(res.data.message, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
-          setLoader(false)
-        })
-        .catch((error) => {
-          console.log(error.message);
-          toast.error(error.response.data.message, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
-          setLoader(false)
-        });
-    } catch (error) {
-      console.log(error.message);
+      toast.success("LogOut Sucessfully", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      setTimeout(() => {
+        localStorage.removeItem("token");
+        navigate("/");
+      }, 2000);
+    } catch (err) {
+      toast.error("LogOut Failed", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   return (
@@ -207,21 +206,24 @@ const UserDetail = () => {
         </div>
         <div className="box_container">
           <div className="right_form">
-         
             <div className="form_title">
               {/* <h4>Welcome to AristosTech Digital Card Creator!</h4> */}
               <p>Update Your Account Details</p>
               <div className="profile">
-              <label htmlFor="profile">
-                <img src={profile || profile_logo} alt="avatar" id="profile_image" />
-              </label>
-              <input
-                onChange={onUpload}
-                type="file"
-                id="profile"
-                name="profile"
-              />
-            </div>
+                <label htmlFor="profile">
+                  <img
+                    src={profile || profile_logo}
+                    alt="avatar"
+                    id="profile_image"
+                  />
+                </label>
+                <input
+                  onChange={onUpload}
+                  type="file"
+                  id="profile"
+                  name="profile"
+                />
+              </div>
             </div>
             {/* <div className="illustration">
               <img src={illustration} alt="illustration" />
@@ -364,7 +366,7 @@ const UserDetail = () => {
             </div>
           </div>
           <div className="right_image">
-            <img className="login"  src={signup} alt="signUp" />
+            <img className="login" src={signup} alt="signUp" />
           </div>
         </div>
       </div>

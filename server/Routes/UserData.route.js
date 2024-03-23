@@ -8,4 +8,5 @@ let router=express.Router();
 
 router.get('/:id',verifyToken,getUserData);
 router.put('/:id',verifyToken,updateUserData);
+
 export default router;

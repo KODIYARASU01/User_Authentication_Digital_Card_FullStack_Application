@@ -32,13 +32,18 @@ const SignIn = () => {
     };
     setLoader(true);
     await axios
-      .post("https://user-authentication-fullstack-application.onrender.com/auth/login", data)
+      .post(
+        "https://user-authentication-fullstack-application.onrender.com/auth/login",
+        data
+      )
       .then((res) => {
-        console.log(res.data);
-
         let token = res.data.Token;
-        console.log(token);
-        localStorage.setItem("token", token);
+
+        const datas = JSON.stringify({
+          token: res?.data?.Token,
+          id: res?.data?.User["_id"],
+        });
+        localStorage.setItem("token", datas);
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 2000,
