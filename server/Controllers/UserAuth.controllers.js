@@ -79,18 +79,3 @@ export const postLogin = async (req, res) => {
     res.status(501).json({ error: error.message });
   }
 };
-
-//LogoOut User
-
-// Route to logout (invalidate) a user token
-
-
-export const deleteUser= async (req, res) => {
-  // const token = req.headers['authorization'].split(' ')[1];
-  // if (!token) return res.status(401).json({ message: "No token provided" });
-
-  // // Add the token to the revoked tokens list
-  // await revokedTokens.push(token);
-  
-  // res.status(200).json({ message: "Logout successful" });
-}

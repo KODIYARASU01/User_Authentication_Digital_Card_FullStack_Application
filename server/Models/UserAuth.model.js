@@ -4,7 +4,7 @@ let UserAuthSchema = new mongoose.Schema(
   {
     profile: {
       type: String,
-      default:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.clipartmax.com%2Fmiddle%2Fm2H7G6H7H7Z5G6m2_male-avatar-admin-profile%2F&psig=AOvVaw1BJjkHdso-f8uFRaRpQi_J&ust=1711257859642000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKjg97rSiYUDFQAAAAAdAAAAABAF",
+      default:"https://img.freepik.com/free-vector/man-profile-account-picture_24908-81754.jpg?w=740&t=st=1711209817~exp=1711210417~hmac=fed4e99777f384563102540c2ed02d00eb19c260b831c01b9dd0734aa0010816",
     },
     firstName: {
       type: String,

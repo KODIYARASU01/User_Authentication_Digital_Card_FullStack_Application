@@ -75,7 +75,7 @@ const UserDetail = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [loader, setLoader] = useState(false);
-
+console.log(profile)
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64(e.target.files[0]);
@@ -212,7 +212,7 @@ const UserDetail = () => {
               <div className="profile">
                 <label htmlFor="profile">
                   <img
-                    src={profile || profile_logo}
+                    src={profile !=undefined ? profile : profile_logo}
                     alt="avatar"
                     id="profile_image"
                   />
