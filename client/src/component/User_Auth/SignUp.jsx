@@ -7,7 +7,7 @@ import profile_logo from "../../assets/User_Auth/profile.png";
 import illustration from "../../assets/Background/register_illustrator.svg";
 import axios from "axios";
 import { convertToBase64 } from "../Helper/Convert.js";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
@@ -64,7 +64,7 @@ const SignUp = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Flip,
         });
         setTimeout(() => {
           navigate("/");
@@ -82,7 +82,7 @@ const SignUp = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Flip,
         });
       });
   }

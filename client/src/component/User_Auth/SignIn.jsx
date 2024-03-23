@@ -4,7 +4,7 @@ import "./SignIn.scss";
 import image from "../../assets/User_Auth/login1.svg";
 import brand from "../../assets/User_Auth/brand.png";
 import axios from "axios";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
@@ -53,7 +53,7 @@ const SignIn = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Flip,
         });
         setTimeout(() => {
           navigate(`/user-detail/${res.data.User._id}`);
@@ -70,7 +70,7 @@ const SignIn = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Flip,
         });
 
         setLoader(false);

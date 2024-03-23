@@ -7,30 +7,42 @@ import UserDetail from "./component/UserDetail/UserDetail";
 // import { auth } from "./authRoutes";
 
 const App = () => {
-  const [user, setuser] = useState(null);
   const navigate = useNavigate();
-  console.log(user);
+  const [user, setUser] = useState(null); // State to store user authentication
 
   useEffect(() => {
-    let token = JSON.parse(localStorage.getItem("token"));
-    setuser(token);
-  }, []);
-
+    const userToken = JSON.parse(localStorage.getItem("token"));
+    if (userToken) {
+      setUser(userToken);
+    }
+  }, [navigate]); // Load user from localStorage on component mount
   return (
     <>
       <Routes>
         <Route
           path="/"
-          element={user ? <Navigate to="/user-detail/:id" /> : <SignIn />}
+          element={
+            user ? <Navigate to={`/user-detail/${user.id}`} /> : <SignIn />
+          }
         />
         <Route
           path="/register"
-          element={user ? <Navigate to="/user-detail/:id" /> : <SignUp />}
+          element={
+            user ? <Navigate to={`/user-detail/${user.id}`} /> : <SignUp />
+          }
         />
-        <Route path="/user-detail/:id" element={<UserDetail />} />
-        {/* {auth.map((e, i) => (
-          <Route key={i} path={e.path} element={e.element} />
-        ))} */}
+        <Route
+          path="/user-detail/:id"
+          element={
+            user ? (
+              <UserDetail user={user} setUser={setUser} />
+            ) : (
+              <Navigate to={"/"} />
+            )
+          }
+        />
+        //{" "}
+        {/* You can use your authRoutes with useAuthRoutes hook here if needed */}
       </Routes>
     </>
   );

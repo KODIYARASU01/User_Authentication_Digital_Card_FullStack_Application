@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./UserDetail.scss";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import signup from "../../assets/User_Auth/register3.jpg";
 import brand from "../../assets/User_Auth/brand.png";
 import illustration from "../../assets/Background/register_illustrator.svg";
 import axios from "axios";
 import profile_logo from "../../assets/User_Auth/profile.png";
 import { convertToBase64 } from "../Helper/Convert";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UserDetail = () => {
+const UserDetail = ({ user, setUser }) => {
   let [UserDetail, setUserDetail] = useState([]);
   let [show, setShow] = useState(false);
-  let { id } = useParams();
 
   //Fetch userData
   useEffect(() => {
@@ -38,7 +37,7 @@ const UserDetail = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Flip,
         });
         setUserDetail(res.data.getUserData);
         setFirstName(res.data.getUserData.firstName);
@@ -60,7 +59,7 @@ const UserDetail = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Flip,
         });
         setLoader(false);
         console.log(error.message);
@@ -75,7 +74,6 @@ const UserDetail = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [loader, setLoader] = useState(false);
-console.log(profile)
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64(e.target.files[0]);
@@ -97,7 +95,7 @@ console.log(profile)
     e.preventDefault();
     try {
       setLoader(true);
-      const token = localStorage.getItem("token");
+      const token = JSON.parse(localStorage.getItem("token"));
 
       let data = {
         profile,
@@ -110,11 +108,11 @@ console.log(profile)
       };
       axios
         .put(
-          `https://user-authentication-fullstack-application.onrender.com/userData/${id}`,
+          `https://user-authentication-fullstack-application.onrender.com/userData/${token.id}`,
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token.token}`,
             },
           }
         )
@@ -129,7 +127,7 @@ console.log(profile)
             draggable: true,
             progress: undefined,
             theme: "light",
-            transition: Bounce,
+            transition: Flip,
           });
           setLoader(false);
         })
@@ -144,7 +142,7 @@ console.log(profile)
             draggable: true,
             progress: undefined,
             theme: "light",
-            transition: Bounce,
+            transition: Flip,
           });
           setLoader(false);
         });
@@ -156,6 +154,8 @@ console.log(profile)
   let handleLogOut = async (e) => {
     e.preventDefault();
     try {
+      localStorage.removeItem("token");
+
       toast.success("LogOut Sucessfully", {
         position: "top-right",
         autoClose: 2000,
@@ -165,10 +165,10 @@ console.log(profile)
         draggable: true,
         progress: undefined,
         theme: "light",
-        transition: Bounce,
+        transition: Flip,
       });
       setTimeout(() => {
-        localStorage.removeItem("token");
+        setUser(null);
         navigate("/");
       }, 2000);
     } catch (err) {
@@ -181,7 +181,7 @@ console.log(profile)
         draggable: true,
         progress: undefined,
         theme: "light",
-        transition: Bounce,
+        transition: Flip,
       });
     }
   };
@@ -212,7 +212,7 @@ console.log(profile)
               <div className="profile">
                 <label htmlFor="profile">
                   <img
-                    src={profile !=undefined ? profile : profile_logo}
+                    src={profile ? profile : profile_logo}
                     alt="avatar"
                     id="profile_image"
                   />
@@ -284,33 +284,7 @@ console.log(profile)
                   <i className="bx bxs-envelope"></i>
                 </div>
               </div>
-              {/* Password`` */}
-              <div className="form_group">
-                <label htmlFor="email">
-                  Password{" "}
-                  <span>
-                    <sup>*</sup>
-                  </span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="icon">
-                  <i className="bx bxs-lock"></i>
-                </div>
-                <div className="show_pass" onClick={handleShow}>
-                  {!show ? (
-                    <i className="bx bx-low-vision"></i>
-                  ) : (
-                    <i className="bx bxs-show"></i>
-                  )}
-                </div>
-              </div>
+
               {/* //Location */}
               <div className="form_group">
                 <label htmlFor="location">Location</label>
