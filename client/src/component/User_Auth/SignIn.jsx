@@ -6,14 +6,33 @@ import brand from "../../assets/User_Auth/brand.png";
 import axios from "axios";
 import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useContext } from "react";
+import formContext from "../Context/FormContext";
 const SignIn = () => {
+  let {
+    user,
+    setUser,
+    profileView,
+    setProfileView,
+    show,
+    setShow,
+    profile,
+    setProfile,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    location,
+    mobileNumber,
+    setMobileNumber,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    loader,
+    setLoader,
+  } = useContext(formContext);
   let navigate = useNavigate();
-  let [show, setShow] = useState(false);
-  let [email, setEmail] = useState("");
-  let [password, setpassword] = useState("");
-  let [loader, setLoader] = useState(false);
-
   //Password Show hide :
   let handleShow = () => {
     let password = document.getElementById("password");
@@ -33,7 +52,7 @@ const SignIn = () => {
     setLoader(true);
     await axios
       .post(
-        "https://user-authentication-fullstack-application.onrender.com/auth/login",
+        "http://localhost:3001/auth/login",
         data
       )
       .then((res) => {
@@ -55,8 +74,10 @@ const SignIn = () => {
           theme: "light",
           transition: Flip,
         });
+        setEmail("");
+        setPassword("");
         setTimeout(() => {
-          navigate(`/user-detail/${res.data.User._id}`);
+          navigate(`/admin/${res.data.User._id}`);
         }, 2000);
         setLoader(false);
       })
@@ -142,7 +163,7 @@ const SignIn = () => {
                   name="password"
                   id="password"
                   value={password}
-                  onChange={(e) => setpassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="icon">
                   <i className="bx bxs-lock-open"></i>

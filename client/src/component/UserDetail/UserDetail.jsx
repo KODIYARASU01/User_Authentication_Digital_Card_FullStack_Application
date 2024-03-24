@@ -9,71 +9,90 @@ import profile_logo from "../../assets/User_Auth/profile.png";
 import { convertToBase64 } from "../Helper/Convert";
 import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UserDetail = ({ user, setUser }) => {
-  let [UserDetail, setUserDetail] = useState([]);
-  let [show, setShow] = useState(false);
 
+import { useContext } from "react";
+import formContext from "../Context/FormContext";
+const UserDetail = () => {
+  let {
+    UserDetails,
+    setUserDetails,
+    user,
+    setUser,
+    profileView,
+    setProfileView,
+    show,
+    setShow,
+    profile,
+    setProfile,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    location,
+    setLocation,
+    mobileNumber,
+    setMobileNumber,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    loader,
+    setLoader,
+  } = useContext(formContext);
   //Fetch userData
-  useEffect(() => {
-    setLoader(true);
-    let id = JSON.parse(localStorage.getItem("token"));
+  // useEffect(() => {
+  //   setLoader(true);
+  //   let id = JSON.parse(localStorage.getItem("token"));
 
-    axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Flip,
-        });
-        setUserDetail(res.data.getUserData);
-        setFirstName(res.data.getUserData.firstName);
-        setLastName(res.data.getUserData.lastName);
-        setEmail(res.data.getUserData.email);
-        setLocation(res.data.getUserData.location);
-        setPassword(res.data.getUserData.password);
-        setMobileNumber(res.data.getUserData.mobileNumber);
-        setProfile(res.data.getUserData.profile);
-        setLoader(false);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Flip,
-        });
-        setLoader(false);
-        console.log(error.message);
-      });
-  }, []);
+  //   axios
+  //     .get(
+  //       `http://localhost:3001/userData/${id.id}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${id.token}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       toast.success(res.data.message, {
+  //         position: "top-right",
+  //         autoClose: 2000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //         transition: Flip,
+  //       });
+  //       setUserDetails(res.data.getUserData);
+  //       setFirstName(res.data.getUserData.firstName);
+  //       setLastName(res.data.getUserData.lastName);
+  //       setEmail(res.data.getUserData.email);
+  //       setLocation(res.data.getUserData.location);
+  //       setPassword(res.data.getUserData.password);
+  //       setMobileNumber(res.data.getUserData.mobileNumber);
+  //       setProfile(res.data.getUserData.profile);
+  //       setLoader(false);
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error.response.data.message, {
+  //         position: "top-right",
+  //         autoClose: 2000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //         transition: Flip,
+  //       });
+  //       setLoader(false);
+  //       console.log(error.message);
+  //     });
+  // }, []);
   let navigate = useNavigate();
-  let [profile, setProfile] = useState();
-  let [firstName, setFirstName] = useState("");
-  let [lastName, setLastName] = useState("");
-  let [location, setLocation] = useState("");
-  let [mobileNumber, setMobileNumber] = useState("");
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [loader, setLoader] = useState(false);
+
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64(e.target.files[0]);
@@ -108,7 +127,7 @@ const UserDetail = ({ user, setUser }) => {
       };
       axios
         .put(
-          `https://user-authentication-fullstack-application.onrender.com/userData/${token.id}`,
+          `http://localhost:3001/userData/${token.id}`,
           data,
           {
             headers: {

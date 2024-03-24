@@ -9,18 +9,31 @@ import axios from "axios";
 import { convertToBase64 } from "../Helper/Convert.js";
 import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import formContext from "../Context/FormContext.jsx";
 const SignUp = () => {
-  let navigate = useNavigate();
-  let [show, setShow] = useState(false);
-  let [profile, setProfile] = useState();
-  let [firstName, setFirstName] = useState("");
-  let [lastName, setLastName] = useState("");
-  let [location, setLocation] = useState("");
-  let [mobileNumber, setMobileNumber] = useState("");
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [loader, setLoader] = useState(false);
+  let navigate=useNavigate();
+let {
+  show,
+  setShow,
+  profile,
+  setProfile,
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  location,
+  setLocation,
+  mobileNumber,
+  setMobileNumber,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  loader,
+  setLoader,
+  UserDetails,
+  setUserDetails,
+} = useContext(formContext)
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64(e.target.files[0]);
@@ -51,7 +64,7 @@ const SignUp = () => {
       mobileNumber,
     };
     await axios
-      .post("https://user-authentication-fullstack-application.onrender.com/auth/register", data)
+      .post("http://localhost:3001/auth/register", data)
       .then((res) => {
         console.log(res);
         setLoader(false);
@@ -66,6 +79,15 @@ const SignUp = () => {
           theme: "light",
           transition: Flip,
         });
+
+        setPassword('');
+        setFirstName('');
+        setLastName("");
+        setEmail("");
+        setPassword("");
+        setLocation("");
+        setMobileNumber("")
+        setProfile(undefined)
         setTimeout(() => {
           navigate("/");
         }, 2000);
