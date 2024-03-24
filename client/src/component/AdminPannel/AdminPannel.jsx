@@ -10,8 +10,9 @@ import profile_logo from "../../assets/User_Auth/profile.png";
 import { convertToBase64 } from "../Helper/Convert";
 import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {motion as m} from 'framer-motion'
+import { motion as m } from "framer-motion";
 import formContext from "../Context/FormContext";
+import Sidebar from "./Sidebar";
 const AdminPannel = () => {
   let {
     user,
@@ -38,19 +39,149 @@ const AdminPannel = () => {
     setPassword,
     loader,
     setLoader,
+    Data,
+    setData,
+    BasicID,
+    setBasicID,
+    ProductId,
+    setProdictId,
+    QRCodeId,
+    setQRCodeId,
+    GallId,
+    setGallId,
+    TestimonialID,
+    setTestimonialID,
+    slideClose,
+    setSlideShow,
+    basicForm,
+    setBasicForm,
+    contactForm,
+    setContactForm,
+    serviceForm,
+    setServiceForm,
+    productForm,
+    setProductForm,
+    galleryForm,
+    setGalleryForm,
+    socialMediaForm,
+    setSocialMediaForm,
+    testimonialForm,
+    setTestimonialForm,
+    QRCodeForm,
+    setQRCodeForm,
+    banner,
+    setBanner,
+    userDetail,
+    setUserDetail,
+    logo,
+    setLogo,
+    fullName,
+    setFullName,
+    profession,
+    setProfession,
+    summary,
+    setSummary,
+    Email,
+    // setEmail,
+    AlternateEmail,
+    setAlternateEmail,
+    MobileNumber,
+    // setMobileNumber,
+    AlternateMobileNumber,
+    setAlternateMobileNumber,
+    DOB,
+    setDOB,
+    Address,
+    setAddress,
+    serviceImage,
+    setServiceImage,
+    serviceTitle,
+    setServiceTitle,
+    serviceSummary,
+    setServiceSummary,
+    productImage,
+    setProductImage,
+    productTitle,
+    setProductTitle,
+    productReleaseDate,
+    setProductReleaseDate,
+    productSummary,
+    setProductSummary,
+    galleryImage,
+    setGalleryImage,
+    videoURL,
+    setVideoURL,
+    Facebook,
+    setFacebook,
+    LinkedIn,
+    setLinkedIn,
+    WhatsUp,
+    setWhatsUp,
+    Instagram,
+    setInstagram,
+    Twiter,
+    setTwiter,
+    clientImage,
+    setClientImage,
+    clientName,
+    setClientName,
+    clientFeedbackDate,
+    setClientFeedbackDate,
+    clientFeedback,
+    setClientFeedback,
+    QRCodeImage,
+    setQRCodeImage,
+    ID,
+    setID,
+    loader2,
+    setLoader2,
+    BasicData,
+    setBasicData,
+    ContactData,
+    setContactData,
+    ServiceData,
+    setServiceData,
+    ProductData,
+    setProductData,
+    GalleryData,
+    setGalleryData,
+    SocialMediaData,
+    setSocialMediaData,
+    TestimonialData,
+    setTestimonialData,
+    QRCodeData,
+    setQRCodeData,
+    BasicEdit,
+    setBasicEdit,
+    ContactEdit,
+    setContactEdit,
+    ServiceEdit,
+    setServiceEdit,
+    ProductEdit,
+    setProductEdit,
+    GalleryEdit,
+    setGalleryEdit,
+    SocialMediaEdit,
+    setSocialMediaEdit,
+    TestimonialEdit,
+    setTestimonialEdit,
+    QRCodeEdit,
+    setQRCodeEdit,
   } = useContext(formContext);
   useEffect(() => {
     setLoader(true);
     let id = JSON.parse(localStorage.getItem("token"));
 
     axios
-      .get(`https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`, {
-        headers: {
-          Authorization: `Bearer ${id.token}`,
-        },
-      })
+      .get(
+        `https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        }
+      )
       .then((res) => {
-  
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 2000,
@@ -113,11 +244,15 @@ const AdminPannel = () => {
         mobileNumber,
       };
       axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/userData/${token.id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token.token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/userData/${token.id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token.token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
           toast.success(res.data.message, {
@@ -170,12 +305,12 @@ const AdminPannel = () => {
         transition: Flip,
       });
       setUserDetails();
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setLocation('');
-      setPassword('');
-      setMobileNumber('');
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setLocation("");
+      setPassword("");
+      setMobileNumber("");
       setProfile(undefined);
       setTimeout(() => {
         setUser(null);
@@ -196,10 +331,10 @@ const AdminPannel = () => {
     }
   };
 
-  let profileAnime={
-    hide:{opacity:0,y:-1000,transition:{duration:1,type:'spring'}},
-    show:{opacity:1,y:0,transition:{duration:1,type:'spring'}}
-  }
+  let profileAnime = {
+    hide: { opacity: 0, y: -1000, transition: { duration: 1, type: "spring" } },
+    show: { opacity: 1, y: 0, transition: { duration: 1, type: "spring" } },
+  };
   return (
     <>
       <m.div className="admin_container">
@@ -210,19 +345,39 @@ const AdminPannel = () => {
           pauseOnHover
           theme="light"
         />
+        {/* Navbar */}
         <m.div className="nav_bar">
           <m.div className="brand">
+            {!slideClose ? (
+              <i
+                className="bx bx-chevrons-right bx-flashing"
+                onClick={() => setSlideShow(!slideClose)}
+              ></i>
+            ) : (
+              <i
+                className="bx bx-menu-alt-left"
+                onClick={() => setSlideShow(!slideClose)}
+              ></i>
+            )}
+
             <img src={brand} alt="brand" />
           </m.div>
           <m.div className="profile">
             <m.img
-              src={profile !=undefined ? profile :logo}
+              src={profile != undefined ? profile : logo}
               alt="logo"
-              onClick={() => setProfileView(!profileView)}
+              onClick={() => {
+                setProfileView(!profileView), setSlideShow(false);
+              }}
             />
           </m.div>
         </m.div>
-        <m.div className="user_profile" variants={profileAnime}  animate={profileView === true ? 'show':'hide'}>
+        {/* //User Profile */}
+        <m.div
+          className="user_profile"
+          variants={profileAnime}
+          animate={profileView === true ? "show" : "hide"}
+        >
           <m.div className="box_container">
             <div className="right_form">
               <div className="form_title">
@@ -231,7 +386,7 @@ const AdminPannel = () => {
                 <div className="profile">
                   <label htmlFor="profile">
                     <img
-                      src={profile !=undefined ? profile : profile_logo}
+                      src={profile != undefined ? profile : profile_logo}
                       alt="avatar"
                       id="profile_image"
                     />
@@ -363,6 +518,8 @@ const AdminPannel = () => {
             </div>
           </m.div>
         </m.div>
+        {/* //SideBar */}
+        <Sidebar />
       </m.div>
     </>
   );
