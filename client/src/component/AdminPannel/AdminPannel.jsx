@@ -44,7 +44,7 @@ const AdminPannel = () => {
     let id = JSON.parse(localStorage.getItem("token"));
 
     axios
-      .get(`http://localhost:3001/userData/${id.id}`, {
+      .get(`https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`, {
         headers: {
           Authorization: `Bearer ${id.token}`,
         },
@@ -113,7 +113,7 @@ const AdminPannel = () => {
         mobileNumber,
       };
       axios
-        .put(`http://localhost:3001/userData/${token.id}`, data, {
+        .put(`https://user-authentication-fullstack-application.onrender.com/userData/${token.id}`, data, {
           headers: {
             Authorization: `Bearer ${token.token}`,
           },

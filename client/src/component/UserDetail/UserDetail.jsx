@@ -46,7 +46,7 @@ const UserDetail = () => {
 
   //   axios
   //     .get(
-  //       `http://localhost:3001/userData/${id.id}`,
+  //       `https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${id.token}`,
@@ -127,7 +127,7 @@ const UserDetail = () => {
       };
       axios
         .put(
-          `http://localhost:3001/userData/${token.id}`,
+          `https://user-authentication-fullstack-application.onrender.com/userData/${token.id}`,
           data,
           {
             headers: {
