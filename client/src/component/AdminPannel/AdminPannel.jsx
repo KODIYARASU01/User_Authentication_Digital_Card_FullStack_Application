@@ -348,7 +348,7 @@ const AdminPannel = () => {
         {/* Navbar */}
         <m.div className="nav_bar">
           <m.div className="brand">
-            {!slideClose ? (
+            {slideClose ? (
               <i
                 className="bx bx-chevrons-right bx-flashing"
                 onClick={() => setSlideShow(!slideClose)}
@@ -367,7 +367,7 @@ const AdminPannel = () => {
               src={profile != undefined ? profile : logo}
               alt="logo"
               onClick={() => {
-                setProfileView(!profileView), setSlideShow(false);
+                setProfileView(!profileView), setSlideShow(true);
               }}
             />
           </m.div>

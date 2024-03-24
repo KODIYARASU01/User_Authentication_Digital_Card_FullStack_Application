@@ -28,7 +28,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="sidebar_container" id={slideClose === false ? "close" : "open"}>
+      <div className="sidebar_container" id={!slideClose === false ? "close" : "open"}>
         <div className="sidebar_header">
           <h3>Digital Card Creator</h3>
         </div>

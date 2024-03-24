@@ -177,14 +177,16 @@ overflow: hidden;
 }
 
 
-  #close {
-    transform: translateX(-1000px);
-    transition: transform 0.5s linear;
-  }
-  #open {
-    transform: translateX(0px);
-    transition: transform 0.5s linear;
-  }
+#close {
+  transform: translateX(-1000px);
+  transition: transform 0.5s linear;
+}
+#open {
+  transform: translateX(0px);
+  transition: transform 0.5s linear;
+}
+
+
 
 
 //Side bar selected notification:
