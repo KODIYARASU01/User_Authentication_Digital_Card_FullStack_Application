@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./AdminPannel.scss";
 import brand from "../../assets/User_Auth/brand.png";
-import logo from "../../assets/User_Auth/profile.png";
+import logo1 from "../../assets/User_Auth/profile.png";
 import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import signup from "../../assets/User_Auth/register3.jpg";
@@ -13,7 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { motion as m } from "framer-motion";
 import formContext from "../Context/FormContext";
 import Sidebar from "./Sidebar";
+import Forms from "./Forms";
 const AdminPannel = () => {
+  
   let {
     user,
     setUser,
@@ -168,6 +170,7 @@ const AdminPannel = () => {
     QRCodeEdit,
     setQRCodeEdit,
   } = useContext(formContext);
+  console.log(profile)
   useEffect(() => {
     setLoader(true);
     let id = JSON.parse(localStorage.getItem("token"));
@@ -364,7 +367,7 @@ const AdminPannel = () => {
           </m.div>
           <m.div className="profile">
             <m.img
-              src={profile != undefined ? profile : logo}
+              src={profile != undefined ? profile : logo1}
               alt="logo"
               onClick={() => {
                 setProfileView(!profileView), setSlideShow(true);
@@ -520,6 +523,9 @@ const AdminPannel = () => {
         </m.div>
         {/* //SideBar */}
         <Sidebar />
+        {/* //Forms */}
+
+        <Forms/>
       </m.div>
     </>
   );
