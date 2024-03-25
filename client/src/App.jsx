@@ -12,6 +12,7 @@ import formContext from "./component/Context/FormContext";
 const App = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  let[loader3,setLoader3]=useState(false);
   // State to store user authentication
   let [UserDetails, setUserDetails] = useState([]);
   let [show, setShow] = useState(false);
@@ -268,6 +269,8 @@ let [QRCodeEdit, setQRCodeEdit] = useState(false);
           setID,
           loader2,
           setLoader2,
+          loader3,
+          setLoader3,
           BasicData,
           setBasicData,
           ContactData,

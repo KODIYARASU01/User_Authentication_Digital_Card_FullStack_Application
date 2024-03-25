@@ -25,8 +25,10 @@ import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 let Forms = () => {
-  let [loader3, setLoader3] = useState(false);
+
   let {
+    loader3,
+    setLoader3,
     Data,
     setData,
     BasicID,

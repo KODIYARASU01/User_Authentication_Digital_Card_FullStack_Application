@@ -14,6 +14,7 @@ import { motion as m } from "framer-motion";
 import formContext from "../Context/FormContext";
 import Sidebar from "./Sidebar";
 import Forms from "./Forms";
+import DemoCard from "./VCards/DemoCard";
 const AdminPannel = () => {
   
   let {
@@ -524,8 +525,9 @@ const AdminPannel = () => {
         {/* //SideBar */}
         <Sidebar />
         {/* //Forms */}
-
         <Forms/>
+        {/* Demo card */}
+        <DemoCard/>
       </m.div>
     </>
   );
