@@ -1,5 +1,5 @@
 import router from "../Routes/BasicDetail.router.js";
-import ContactDetails from "../models/ContactDetail.model.js";
+import ContactDetails from '../Models/ContactDetail.model.js'
 
 export const postData = async (req, res) => {
   try {

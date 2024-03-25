@@ -1,5 +1,5 @@
 import router from "../Routes/BasicDetail.router.js";
-import ServiceDetails from "../models/ServiceDetail.model.js";
+import ServiceDetails from '../Models/ServiceDetail.model.js'
 export const postData = async (req, res) => {
   try {
     if (!req.body.serviceTitle || !req.body.serviceSummary) {

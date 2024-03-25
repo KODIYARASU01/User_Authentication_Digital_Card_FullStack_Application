@@ -1,6 +1,5 @@
 // import router from "../Routes/BasicDetail.router.js";
-import QRCodeDetails from "../models/QRCodeDetail.model.js";
-
+import QRCodeDetails from  '../Models/QRCodeDetail.model.js'
 export const postData = async (req, res) => {
   try {
     if (!req.body.QRCodeImage) {

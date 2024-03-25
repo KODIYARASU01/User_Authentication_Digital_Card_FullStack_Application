@@ -1,6 +1,5 @@
 import router from "../Routes/BasicDetail.router.js";
-import ProductDetails from "../models/ProductDetail.model.js";
-
+import ProductDetails from '../Models/ProductDetail.model.js'
 export const postData = async (req, res) => {
   try {
     if (

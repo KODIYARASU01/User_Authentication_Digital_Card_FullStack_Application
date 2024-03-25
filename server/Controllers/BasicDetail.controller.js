@@ -1,5 +1,4 @@
-import BasicDetail from "../models/BasicDetail.model.js";
-
+import BasicDetail from "../Models/BasicDetail.model.js";
 export const postData = async (req, res) => {
   try {
     if (!req.body.fullName || !req.body.profession) {

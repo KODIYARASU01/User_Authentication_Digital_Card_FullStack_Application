@@ -1,5 +1,5 @@
 import router from "../Routes/BasicDetail.router.js";
-import TestimonialDetails from "../models/Testimonial.model.js";
+import TestimonialDetails from '../Models/Testimonial.model.js'
 export const postData = async (req, res) => {
   try {
     if (!req.body.clientImage || !req.body.clientName || !req.body.clientFeedback || !req.body.clientFeedbackDate) {

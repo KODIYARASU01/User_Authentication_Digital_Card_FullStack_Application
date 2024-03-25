@@ -1,6 +1,5 @@
 import router from "../Routes/BasicDetail.router.js";
-import GalleryDetails from "../models/GalleryDetail.model.js";
-import fs from 'fs';
+import GalleryDetails from '../Models/GalleryDetail.model.js'
 export const postData = async (req, res) => {
   try {
     if (!req.body.galleryImage) {

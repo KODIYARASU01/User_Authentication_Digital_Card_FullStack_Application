@@ -1,6 +1,5 @@
 import router from "../Routes/BasicDetail.router.js";
-import SocialMediaDetails from "../models/SocialMediaDetail.model.js";
-
+import SocialMediaDetails from '../Models/SocialMediaDetail.model.js'
 export const postData = async (req, res) => {
   try {
     if (!req.body.WhatsUp) {
