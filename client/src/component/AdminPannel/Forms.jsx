@@ -1176,7 +1176,7 @@ let Forms = () => {
         {contactForm === true ? (
           <div
             className="Form2_container"
-            id={slideClose ? "Form1close" : "Form1open"}
+            // id={slideClose ? "Form1close" : "Form1open"}
           >
             <div className="Form_title">
               <h4>Contact Detail's Session</h4>
@@ -1279,7 +1279,7 @@ let Forms = () => {
         {serviceForm === true ? (
           <div
             className="Form3_container"
-            id={slideClose ? "Form1close" : "Form1open"}
+            // id={slideClose ? "Form1close" : "Form1open"}
           >
             <div className="Form_title">
               <h4>Our Service Detail Session</h4>
@@ -1364,7 +1364,7 @@ let Forms = () => {
         {productForm === true ? (
           <div
             className="Form4_container"
-            id={slideClose ? "Form1close" : "Form1open"}
+            // id={slideClose ? "Form1close" : "Form1open"}
           >
             <div className="Form_title">
               <h4>Our Product Detail Session</h4>
@@ -1456,7 +1456,7 @@ let Forms = () => {
         {galleryForm === true ? (
           <div
             className="Form5_container"
-            id={slideClose ? "Form1close" : "Form1open"}
+            // id={slideClose ? "Form1close" : "Form1open"}
           >
             <div className="Form_title">
               <h4>Gallery Detail Update</h4>
@@ -1521,7 +1521,7 @@ let Forms = () => {
         {socialMediaForm === true ? (
           <div
             className="Form7_container"
-            id={slideClose ? "Form7close" : "Form7open"}
+            // id={slideClose ? "Form7close" : "Form7open"}
           >
             <div className="Form_title">
               <h4>Social Media Detail Update</h4>
@@ -1617,7 +1617,7 @@ let Forms = () => {
         {testimonialForm === true ? (
           <div
             className="Form8_container"
-            id={slideClose ? "Form1close" : "Form1open"}
+            // id={slideClose ? "Form1close" : "Form1open"}
           >
             <div className="Form_title">
               <h4>Testimonial Session</h4>
@@ -1708,7 +1708,7 @@ let Forms = () => {
         {QRCodeForm === true ? (
           <div
             className="Form9_container"
-            id={slideClose ? "Form1close" : "Form1open"}
+            // id={slideClose ? "Form1close" : "Form1open"}
           >
             <div className="Form_title">
               <h4>QRCode Image Upload</h4>
