@@ -6,6 +6,14 @@ import bodyParser from "body-parser";
 //Import userAuth Routes:
 import UserAuthRoute from "./Routes/UserAuth.route.js";
 import UserDataRoute from './Routes/UserData.route.js';
+import BasicDetailRoute from './Routes/BasicDetail.router.js';
+import ContactDetailRoute from './Routes/ContactDetail.route.js';
+import ServiceDetailRoute from './Routes/ServiceDetails.route.js';
+import ProductDetailRoute from './Routes/ProductDetail.route.js';
+import GalleryDetailRoute from './Routes/GalleryDetail.route.js';
+import SocialMediaDetailRoute from './Routes/SocialMedia.route.js'
+import TestimonialDetailRoute from './Routes/TestimonialDetail.route.js';
+import QRCodeDetailRoute from './Routes/QRCodeDetail.route.js'
 dotenv.config();
 let app = express();
 
@@ -22,8 +30,17 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 
 //All Routes:
+
 app.use("/auth", UserAuthRoute);
-app.use('/userData',UserDataRoute)
+app.use('/userData',UserDataRoute);
+app.use('/basic_detail',BasicDetailRoute);
+app.use('/contact_detail',ContactDetailRoute);
+app.use('/service_detail',ServiceDetailRoute);
+app.use('/product_detail',ProductDetailRoute);
+app.use('/gallery_detail',GalleryDetailRoute);
+app.use('/socialMedia_detail',SocialMediaDetailRoute);
+app.use('/testimonial_detail',TestimonialDetailRoute);
+app.use('/qrcode_detail',QRCodeDetailRoute)
 
 app.get("/", (req, res) => {
   res.send("Server is running");

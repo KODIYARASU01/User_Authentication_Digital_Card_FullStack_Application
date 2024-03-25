@@ -59,9 +59,9 @@ let [summary, setSummary] = useState();
 
 //Contact Detail form States:
 
-// let [Email, setEmail] = useState();
+let [Email1, setEmail1] = useState();
 let [AlternateEmail, setAlternateEmail] = useState();
-// let [MobileNumber, setMobileNumber] = useState();
+let [MobileNumber1, setMobileNumber1] = useState();
 let [AlternateMobileNumber, setAlternateMobileNumber] = useState();
 let [DOB, setDOB] = useState();
 let [Address, setAddress] = useState();
@@ -214,12 +214,12 @@ let [QRCodeEdit, setQRCodeEdit] = useState(false);
           setProfession,
           summary,
           setSummary,
-          // Email,
-          setEmail,
+          Email1,
+          setEmail1,
           AlternateEmail,
           setAlternateEmail,
-          // MobileNumber,
-          setMobileNumber,
+          MobileNumber1,
+          setMobileNumber1,
           AlternateMobileNumber,
           setAlternateMobileNumber,
           DOB,

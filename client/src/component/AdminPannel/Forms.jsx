@@ -21,8 +21,8 @@ import {
   convertQRCodeImageToBase64,
 } from "../Helper/Convert.js";
 import axios from "axios";
-// import { Flip, toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { Flip, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 let Forms = () => {
   let [loader3, setLoader3] = useState(false);
@@ -69,12 +69,12 @@ let Forms = () => {
     setProfession,
     summary,
     setSummary,
-    Email,
-    setEmail,
+    Email1,
+    setEmail1,
     AlternateEmail,
     setAlternateEmail,
-    MobileNumber,
-    setMobileNumber,
+    MobileNumber1,
+    setMobileNumber1,
     AlternateMobileNumber,
     setAlternateMobileNumber,
     DOB,
@@ -198,7 +198,7 @@ let Forms = () => {
     e.preventDefault();
     try {
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
 
       let data = {
         logo,
@@ -210,15 +210,11 @@ let Forms = () => {
       setLoader3(true);
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/basic_detail",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/basic_detail", data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((responce) => {
           toast.success(responce.data.message, {
             position: "top-center",
@@ -256,9 +252,9 @@ let Forms = () => {
   async function handleBasicFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
 
       let data = {
         banner,
@@ -269,15 +265,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://aritostech-digital-card-server.onrender.com/basic_detail/specific/${BasicID}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .put(`https://user-authentication-fullstack-application.onrender.com/basic_detail/specific/${BasicID}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           console.log(res);
           toast.success(res.data.message, {
@@ -319,9 +311,9 @@ let Forms = () => {
     e.preventDefault();
 
     try {
-      // setLoader3(true);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let SocialMediadata = {
         Facebook,
         LinkedIn,
@@ -332,15 +324,11 @@ let Forms = () => {
 
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/socialMedia_detail",
-          SocialMediadata,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/socialMedia_detail", SocialMediadata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           setLoader3(false);
           toast.success(res.data.message, {
@@ -379,9 +367,9 @@ let Forms = () => {
   async function handleSocialMediaFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
         Facebook,
         LinkedIn,
@@ -392,11 +380,11 @@ let Forms = () => {
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://aritostech-digital-card-server.onrender.com/socialMedia_detail/${SocialMediaData._id}`,
+          `https://user-authentication-fullstack-application.onrender.com/socialMedia_detail/${SocialMediaData._id}`,
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${id.token}`,
             },
           }
         )
@@ -435,38 +423,35 @@ let Forms = () => {
   async function handleContactFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let Contactdata = {
-        Email,
+        Email1,
         AlternateEmail,
-        MobileNumber,
+        MobileNumber1,
         AlternateMobileNumber,
         DOB,
         Address,
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/contact_detail",
-          Contactdata,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/contact_detail", Contactdata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
+          console.log(res);
           toast.success(res.data.message, {
             position: "top-center",
             autoClose: 2000,
             transition: Flip,
           });
           setLoader3(false);
-          setMobileNumber("");
+          setMobileNumber1("");
           setAlternateMobileNumber("");
-          setEmail("");
+          setEmail1("");
           setAlternateEmail("");
           setDOB("");
           setAddress("");
@@ -489,28 +474,24 @@ let Forms = () => {
   async function handleContactFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
-        Email,
+        Email1,
         AlternateEmail,
-        MobileNumber,
+        MobileNumber1,
         AlternateMobileNumber,
         DOB,
         Address,
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://aritostech-digital-card-server.onrender.com/contact_detail/${ContactData._id}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .put(`https://user-authentication-fullstack-application.onrender.com/contact_detail/${ContactData._id}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -518,9 +499,9 @@ let Forms = () => {
             transition: Flip,
           });
           setLoader3(false);
-          setMobileNumber("");
+          setMobileNumber1("");
           setAlternateMobileNumber("");
-          setEmail("");
+          setEmail1("");
           setAlternateEmail("");
           setDOB("");
           setAddress("");
@@ -548,9 +529,9 @@ let Forms = () => {
   async function handleServiceFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
 
       let data = {
         serviceImage,
@@ -559,15 +540,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/service_detail",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/service_detail", data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -580,7 +557,6 @@ let Forms = () => {
           setServiceImage();
         })
         .catch((error) => {
-          console.log(error.message);
           toast.error(error.response.data.message, {
             position: "top-center",
             autoClose: 2000,
@@ -604,9 +580,9 @@ let Forms = () => {
     e.preventDefault();
 
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
         serviceImage,
         serviceTitle,
@@ -614,15 +590,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://aritostech-digital-card-server.onrender.com/service_detail/specific/${Data}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .put(`https://user-authentication-fullstack-application.onrender.com/service_detail/specific/${Data}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -660,9 +632,9 @@ let Forms = () => {
   async function handleProductFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let Productdata = {
         productImage,
         productTitle,
@@ -676,15 +648,11 @@ let Forms = () => {
       // formData2.append("productSummary", productSummary);
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/product_detail",
-          Productdata,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/product_detail", Productdata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -698,7 +666,7 @@ let Forms = () => {
           setProductReleaseDate("");
         })
         .catch((error) => {
-          toast.error(error.response, {
+          toast.error(error.response.data.message, {
             position: "top-center",
             autoClose: 2000,
             transition: Flip,
@@ -719,9 +687,9 @@ let Forms = () => {
   async function handleProductEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
         productImage,
         productTitle,
@@ -731,11 +699,11 @@ let Forms = () => {
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://aritostech-digital-card-server.onrender.com/product_detail/specific/${ProductId}`,
+          `https://user-authentication-fullstack-application.onrender.com/product_detail/specific/${ProductId}`,
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${id.token}`,
             },
           }
         )
@@ -778,9 +746,9 @@ let Forms = () => {
   async function handleGalleryFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let Gallerydata = {
         galleryImage,
         videoURL,
@@ -788,15 +756,11 @@ let Forms = () => {
 
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/gallery_detail",
-          Gallerydata,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/gallery_detail", Gallerydata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -832,24 +796,20 @@ let Forms = () => {
   async function handleGalleryEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
         galleryImage,
         videoURL,
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://aritostech-digital-card-server.onrender.com/gallery_detail/specific/${GallId}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .put(`https://user-authentication-fullstack-application.onrender.com/gallery_detail/specific/${GallId}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -858,6 +818,8 @@ let Forms = () => {
           });
 
           setLoader3(false);
+          setGalleryImage(undefined);
+          setVideoURL('')
           setGalleryEdit(false);
         })
         .catch((err) => {
@@ -885,9 +847,9 @@ let Forms = () => {
   async function handleTestimonialFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let SocialMediadata = {
         clientName,
         clientImage,
@@ -896,15 +858,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          `https://aritostech-digital-card-server.onrender.com/testimonial_detail`,
-          SocialMediadata,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post(`https://user-authentication-fullstack-application.onrender.com/testimonial_detail`, SocialMediadata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -940,9 +898,9 @@ let Forms = () => {
   async function handleTestimonialEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
         clientImage,
         clientName,
@@ -952,11 +910,11 @@ let Forms = () => {
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://aritostech-digital-card-server.onrender.com/testimonial_detail/specific/${TestimonialID}`,
+          `https://user-authentication-fullstack-application.onrender.com/testimonial_detail/specific/${TestimonialID}`,
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${id.token}`,
             },
           }
         )
@@ -998,24 +956,20 @@ let Forms = () => {
   async function handleQRCodeFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
 
       let data = {
         QRCodeImage,
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://aritostech-digital-card-server.onrender.com/qrcode_detail",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post("https://user-authentication-fullstack-application.onrender.com/qrcode_detail", data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -1024,7 +978,7 @@ let Forms = () => {
           });
 
           setLoader3(false);
-          setQRCodeImage("");
+          setQRCodeImage(undefined);
         })
         .catch((error) => {
           toast.error(error.response.data.message, {
@@ -1050,23 +1004,19 @@ let Forms = () => {
   async function handleQRCodeEdit(e) {
     e.preventDefault();
     try {
-      setLoader3(false);
+      setLoader3(true);
       // Retrieve token from local storage or wherever it's stored
-      const token = localStorage.getItem("token");
+      let id = JSON.parse(localStorage.getItem("token"));
       let data = {
         QRCodeImage,
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://aritostech-digital-card-server.onrender.com/qrcode_detail/specific/${QRCodeId}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .put(`https://user-authentication-fullstack-application.onrender.com/qrcode_detail/specific/${QRCodeId}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -1233,7 +1183,7 @@ let Forms = () => {
               <img src={user} alt="user" />
             </div>
 
-            <form action="" onScroll={handleContactFormSubmit}>
+            <form action="" onSubmit={handleContactFormSubmit}>
               {/* Email */}
               <div className="form_group">
                 <label htmlFor="email">Email</label>
@@ -1242,8 +1192,8 @@ let Forms = () => {
                   placeholder="Eg : abc@gmail.com"
                   name="email"
                   id="email"
-                  value={Email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={Email1}
+                  onChange={(e) => setEmail1(e.target.value)}
                 />
               </div>
               {/* Alternate Email */}
@@ -1266,8 +1216,8 @@ let Forms = () => {
                   placeholder="Eg : +91 6547987845"
                   name="mobile"
                   id="mobile"
-                  value={MobileNumber}
-                  onChange={(e) => setMobileNumber(e.target.value)}
+                  value={MobileNumber1}
+                  onChange={(e) => setMobileNumber1(e.target.value)}
                 />
               </div>
               {/* Mobile Number  */}
@@ -1309,11 +1259,15 @@ let Forms = () => {
 
               {ContactEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleContactFormEdit}>Update</button>
+                  <button onClick={handleContactFormEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload</button>
+                  <button type="submit">
+                    Upload{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
@@ -1390,11 +1344,15 @@ let Forms = () => {
 
               {ServiceEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleServiceFormEdit}>Update</button>
+                  <button onClick={handleServiceFormEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Submit</button>
+                  <button type="submit">
+                    Submit{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
@@ -1478,11 +1436,15 @@ let Forms = () => {
 
               {ProductEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleProductEdit}>Update</button>
+                  <button onClick={handleProductEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload</button>
+                  <button type="submit">
+                    Upload{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
@@ -1542,11 +1504,11 @@ let Forms = () => {
 
               {GalleryEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleGalleryEdit}>Update</button>
+                  <button onClick={handleGalleryEdit}>Update{loader3 ? <span className="loader3"></span> : ""}</button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload</button>
+                  <button type="submit">Upload{loader3 ? <span className="loader3"></span> : ""}</button>
                 </div>
               )}
             </form>
@@ -1635,11 +1597,15 @@ let Forms = () => {
               </div>
               {SocialMediaEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleSocialMediaFormEdit}>Update</button>
+                  <button onClick={handleSocialMediaFormEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload</button>
+                  <button type="submit">
+                    Upload{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
@@ -1658,7 +1624,7 @@ let Forms = () => {
               <img src={user} alt="user" />
             </div>
 
-            <form action="">
+            <form action="" onSubmit={handleTestimonialFormSubmit}>
               {/* //service image */}
               <div className="form_group">
                 <label htmlFor="testimonialImage">
@@ -1725,11 +1691,11 @@ let Forms = () => {
 
               {TestimonialEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleTestimonialEdit}>Update</button>
+                  <button onClick={handleTestimonialEdit}>Update{loader3 ? <span className="loader3"></span> : ""}</button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload</button>
+                  <button type="submit">Upload{loader3 ? <span className="loader3"></span> : ""}</button>
                 </div>
               )}
             </form>
@@ -1770,11 +1736,11 @@ let Forms = () => {
               </div>
               {QRCodeEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleQRCodeEdit}>Update</button>
+                  <button onClick={handleQRCodeEdit}>Update{loader3 ? <span className="loader3"></span> : ""}</button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload</button>
+                  <button type="submit">Upload{loader3 ? <span className="loader3"></span> : ""}</button>
                 </div>
               )}
             </form>

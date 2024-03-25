@@ -83,12 +83,12 @@ const AdminPannel = () => {
     setProfession,
     summary,
     setSummary,
-    Email,
-    // setEmail,
+    Email1,
+    setEmail1,
     AlternateEmail,
     setAlternateEmail,
-    MobileNumber,
-    // setMobileNumber,
+    MobileNumber1,
+    setMobileNumber1,
     AlternateMobileNumber,
     setAlternateMobileNumber,
     DOB,
@@ -170,7 +170,7 @@ const AdminPannel = () => {
     QRCodeEdit,
     setQRCodeEdit,
   } = useContext(formContext);
-  console.log(profile)
+
   useEffect(() => {
     setLoader(true);
     let id = JSON.parse(localStorage.getItem("token"));

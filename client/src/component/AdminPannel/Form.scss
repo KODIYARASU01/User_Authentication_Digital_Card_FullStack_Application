@@ -1,5 +1,5 @@
 .forms_container {
- width: 50vw;
+  width: 50vw;
   height: 100vh;
   position: absolute;
   left: 20%;
@@ -48,17 +48,17 @@
       overflow: hidden;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       //   grid-template-columns: 1fr 1fr 1fr;
-      grid-row-gap:0.2rem;
+      grid-row-gap: 0.2rem;
       grid-column-gap: 15px;
       position: relative;
 
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 5%;
-        top:0%;
+        top: 0%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 40px;
           height: 40px;
@@ -66,8 +66,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -128,7 +128,6 @@
             // mix-blend-mode: multiply;
           }
           .logo {
-          
             width: 100px;
             height: 100px;
             object-fit: cover;
@@ -156,7 +155,7 @@
           caret-color: rgb(105, 88, 255);
           &::placeholder {
             font-size: 0.6rem;
-            color:rgb(77, 76, 76);
+            color: rgb(77, 76, 76);
           }
           &:focus {
             border: 1px solid rgb(92, 133, 245);
@@ -164,7 +163,7 @@
         }
         &::placeholder {
           font-size: 0.6rem;
-          color:rgb(77, 76, 76);
+          color: rgb(77, 76, 76);
         }
       }
 
@@ -177,7 +176,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          gap:1rem;
+          gap: 1rem;
           width: 60%;
           outline: none;
           border: transparent;
@@ -201,15 +200,14 @@
         padding: 0.6rem 0.4rem;
         margin: auto;
         height: auto;
-   
       }
     }
 
     @media screen and (max-width: 900px) {
       width: 100%;
       margin: auto;
-  height: 130vh;
-  overflow: scroll;
+      height: 130vh;
+      overflow: scroll;
       padding: 1rem 0.2rem;
     }
   }
@@ -247,7 +245,7 @@
       height: auto;
       background-color: #343435;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
@@ -256,13 +254,13 @@
       //   grid-template-columns: 1fr 1fr 1fr;
       grid-row-gap: 0.4rem;
       grid-column-gap: 15px;
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 10%;
-        top:5%;
+        top: 5%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 40px;
           height: 40px;
@@ -270,8 +268,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -347,14 +345,18 @@
         align-items: center;
         justify-content: center;
 
-       button {
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
           width: 75%;
           border: transparent;
-          display: block !important;
+
           outline: none;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 600;
           color: white;
           cursor: pointer;
@@ -394,7 +396,6 @@
     // background-color: aqua;
     padding: 0rem 0.2rem;
 
-
     .Form_title {
       font-weight: bold;
 
@@ -416,7 +417,7 @@
       height: auto;
       background-color: #3b3b3b;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
@@ -425,12 +426,12 @@
       //   grid-template-columns: 1fr 1fr 1fr;
       grid-row-gap: 2rem;
       grid-column-gap: 15px;
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 10%;
-        top:5%;
+        top: 5%;
         z-index: 600;
-        img{
+        img {
           cursor: pointer !important;
           width: 35px;
           height: 35px;
@@ -438,8 +439,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -522,13 +523,17 @@
         justify-content: center;
 
         button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
           width: 75%;
-          display: block !important;
+          // display: block !important;
           outline: none;
           border: transparent;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 600;
           color: white;
           cursor: pointer;
@@ -587,7 +592,7 @@
       height: auto;
       background-color: #2e2e2e;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
@@ -596,13 +601,13 @@
       //   grid-template-columns: 1fr 1fr 1fr;
       grid-row-gap: 0.5rem;
       grid-column-gap: 15px;
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 10%;
-        top:7%;
+        top: 7%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 35px;
           height: 35px;
@@ -610,8 +615,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -695,12 +700,15 @@
 
         button {
           width: 75%;
-          display: block !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
           outline: none;
           border: transparent;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 600;
           color: white;
           cursor: pointer;
@@ -760,7 +768,7 @@
       height: auto;
       background-color: #303031;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
@@ -768,14 +776,14 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       //   grid-template-columns: 1fr 1fr 1fr;
       grid-row-gap: 2rem;
-      grid-column-gap:1.5rem;
-      .edit_form{
+      grid-column-gap: 1.5rem;
+      .edit_form {
         position: absolute;
         right: 10%;
-        top:7%;
+        top: 7%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 35px;
           height: 35px;
@@ -783,8 +791,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -868,12 +876,15 @@
 
         button {
           width: 75%;
-          display: block !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
           outline: none;
           border: transparent;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 600;
           color: white;
           cursor: pointer;
@@ -933,7 +944,7 @@
       height: 70%;
       background-color: #414eff;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       margin: 1rem auto;
       display: grid;
       overflow: hidden;
@@ -941,13 +952,13 @@
       //   grid-template-columns: 1fr 1fr 1fr;
       grid-row-gap: 10px;
       grid-column-gap: 15px;
-   .edit_form{
+      .edit_form {
         position: absolute;
         right: 10%;
-        top:8%;
+        top: 8%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 40px;
           height: 40px;
@@ -955,8 +966,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -1094,22 +1105,22 @@
       height: auto;
       background-color: #303133;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
       overflow: hidden;
       // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
       grid-row-gap: 1rem;
       grid-column-gap: 15px;
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 6%;
-        top:7%;
+        top: 7%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 35px;
           height: 35px;
@@ -1117,8 +1128,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -1143,10 +1154,10 @@
           justify-content: center;
           flex-direction: column;
           position: relative;
-            margin: auto;
+          margin: auto;
           gap: 10px;
 
-          img{
+          img {
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -1183,14 +1194,18 @@
         align-items: center;
         justify-content: center;
 
-       button {
-          width: 35%;
-          display: block !important;
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          width: 40%;
+          // display: block !important;
           outline: none;
           border: transparent;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 600;
           color: white;
           cursor: pointer;
@@ -1251,7 +1266,7 @@
       height: auto;
       background-color: #343435;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
@@ -1260,13 +1275,13 @@
       //   grid-template-columns: 1fr 1fr 1fr;
       grid-row-gap: 2rem;
       grid-column-gap: 15px;
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 6%;
-        top:7%;
+        top: 7%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 35px;
           height: 35px;
@@ -1274,8 +1289,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -1305,13 +1320,13 @@
           gap: 10px;
           .testimonialImage {
             margin: 10px;
-          
+
             width: 100px;
             height: 100px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center;
-           
+
             cursor: pointer;
           }
           .upload {
@@ -1358,14 +1373,17 @@
         align-items: center;
         justify-content: center;
 
-       button {
+        button {
           width: 75%;
-          display: block !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
           outline: none;
           border: transparent;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 600;
           color: white;
           cursor: pointer;
@@ -1425,22 +1443,22 @@
       height: auto;
       background-color: #343435;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
-      padding:1rem 0.5rem ;
+      padding: 1rem 0.5rem;
       border-radius: 1rem;
       margin: 1rem auto;
       display: grid;
       overflow: hidden;
       // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
       grid-row-gap: 2rem;
       grid-column-gap: 15px;
-      .edit_form{
+      .edit_form {
         position: absolute;
         right: 6%;
-        top:7%;
+        top: 7%;
         z-index: 600;
 
-        img{
+        img {
           cursor: pointer !important;
           width: 35px;
           height: 35px;
@@ -1448,8 +1466,8 @@
           padding: 5px;
           transition: all 0.4s ease-in-out;
 
-          &:hover{
-            box-shadow: 0px 4px 5px rgba(0,0,0,0.4);
+          &:hover {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease-in-out;
           }
         }
@@ -1479,7 +1497,7 @@
           gap: 10px;
           .QRCodeImage {
             margin: 10px auto;
-          
+
             min-width: 250px;
             width: 250px;
             min-height: 150px;
@@ -1487,7 +1505,7 @@
             border-radius: 1rem;
             object-fit: cover;
             object-position: center;
-           
+
             cursor: pointer;
           }
           .upload {
@@ -1536,12 +1554,15 @@
 
         button {
           width: 45%;
-          display: block !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
           outline: none;
           border: transparent;
           background-color: #79be3f;
           padding: 8px 1rem;
-      border-radius: 1rem;
+          border-radius: 1rem;
           font-weight: 500;
           font-size: 0.9rem;
           color: white;
@@ -1569,7 +1590,7 @@
       padding: 1rem 0.2rem;
     }
   }
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
   @media screen and (max-width: 900px) {
@@ -1580,14 +1601,13 @@
     position: absolute;
     top: 10%;
     left: 0%;
-overflow: auto;
+    overflow: auto;
     padding: 0.1rem 0.2rem;
     // box-shadow: 0px 4px 5px rgba(0,0,0,0.5);
   }
 }
 
-
-@media screen and (min-width:900px){
+@media screen and (min-width: 900px) {
   #Formclose {
     width: 50vw;
     height: 90vh;
@@ -1599,16 +1619,14 @@ overflow: auto;
   }
 }
 
-
-
-#Form1close{
+#Form1close {
   width: 60%;
   height: 90%;
   min-width: 60%;
   // width: 65%;
   transition: all 0.5s linear;
 }
-#Form7close{
+#Form7close {
   min-width: 50%;
   width: 50%;
   transition: all 0.5s linear;
@@ -1620,7 +1638,7 @@ overflow: auto;
   height: 18px;
   border-radius: 50%;
   display: inline-block;
-  border-top: 3px solid #49e7b3;
+  border-top: 3px solid #ffffff;
   border-right: 3px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
@@ -1633,4 +1651,4 @@ overflow: auto;
   100% {
     transform: rotate(360deg);
   }
-} 
+}
