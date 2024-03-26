@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy,Suspense } from "react";
 import "./App.css";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import SignIn from "./component/User_Auth/SignIn";
-import SignUp from "./component/User_Auth/SignUp";
-import UserDetail from "./component/UserDetail/UserDetail";
-import AdminPannel from "./component/AdminPannel/AdminPannel";
 import formContext from "./component/Context/FormContext";
 
-// import { auth } from "./authRoutes";
+
+let SignIn=lazy(()=>import('./component/User_Auth/SignIn'));
+let SignUp=lazy(()=>import('./component/User_Auth/SignUp'));
+let UserDetail=lazy(()=>import('./component/UserDetail/UserDetail'));
+let AdminPannel=lazy(()=>import('./component/AdminPannel/AdminPannel'));
+let NewCard2=lazy(()=>import('./component/AdminPannel/Cards/NewCard2'));
+let Loader=lazy(()=>import('./component/Loader/Loader'));
 
 const App = () => {
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ let [QRCodeId, setQRCodeId] = useState("");
 let [GallId, setGallId] = useState("");
 let [TestimonialID, setTestimonialID] = useState("");
 //States all
-let [slideClose, setSlideShow] = useState(true);
+let [slideClose, setSlideShow] = useState(false);
 let [basicForm, setBasicForm] = useState(true);
 let [contactForm, setContactForm] = useState(false);
 let [serviceForm, setServiceForm] = useState(false);
@@ -137,15 +139,17 @@ let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
 
 let [TestimonialEdit, setTestimonialEdit] = useState(false);
 let [QRCodeEdit, setQRCodeEdit] = useState(false);
-
+const userToken = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("token"));
     if (userToken) {
       setUser(userToken);
     }
   }, [navigate]); // Load user from localStorage on component mount
+  console.log(user)
   return (
     <>
+    
       <formContext.Provider
         value={{
           UserDetails,
@@ -305,6 +309,7 @@ let [QRCodeEdit, setQRCodeEdit] = useState(false);
           setQRCodeEdit,
         }}
       >
+        <Suspense fallback={<h4>Loading.....</h4>}>
         <Routes>
           <Route
             path="/"
@@ -324,8 +329,12 @@ let [QRCodeEdit, setQRCodeEdit] = useState(false);
           />
           <Route path="admin/:id" element={user ? <AdminPannel /> :<Navigate to={"/"} />}/>
           //{" "}
+
+          <Route path={user ? user.user:'/'} element={user?<NewCard2/>:<Navigate to={"/"}/>}/>
           {/* You can use your authRoutes with useAuthRoutes hook here if needed */}
         </Routes>
+        </Suspense>
+    
       </formContext.Provider>
     </>
   );

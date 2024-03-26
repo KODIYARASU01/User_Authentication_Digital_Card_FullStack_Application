@@ -56,11 +56,10 @@ const SignIn = () => {
         data
       )
       .then((res) => {
-        let token = res.data.Token;
-
         const datas = JSON.stringify({
           token: res?.data?.Token,
           id: res?.data?.User["_id"],
+          user:res?.data?.User["firstName"]
         });
         localStorage.setItem("token", datas);
         toast.success(res.data.message, {

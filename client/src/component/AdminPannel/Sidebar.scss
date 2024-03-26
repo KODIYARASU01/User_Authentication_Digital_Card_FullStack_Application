@@ -176,16 +176,27 @@ overflow: hidden;
   }
 }
 
-
-#close {
-  transform: translateX(-1000px);
-  transition: transform 0.5s linear;
+@media screen and (min-width:700px){
+  #close {
+    transform: translateX(-1000px);
+    transition: transform 0.5s linear;
+  }
+  #open {
+    transform: translateX(0px);
+    transition: transform 0.5s linear;
+  }
 }
-#open {
-  transform: translateX(0px);
-  transition: transform 0.5s linear;
-}
 
+@media screen and (max-width:700px){
+  #close {
+    transform: translateX(0px);
+    transition: transform 0.5s linear;
+  }
+  #open {
+    transform: translateX(-1000px);
+    transition: transform 0.5s linear;
+  }
+}
 
 
 

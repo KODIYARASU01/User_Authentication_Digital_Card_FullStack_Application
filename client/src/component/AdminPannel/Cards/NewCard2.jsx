@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useMemo, useContext, useState } from "react";
-import "./DemoCard.scss";
+import React,{useRef,useEffect} from "react";
+import "./NewCard2.scss";
 import banner from "../../../assets/Background/12.jpg";
 import avatar from "../../../assets/avatar_2.png";
-// import logo from "../../../assets/avatar_2.jpg";
-import background from "../../../assets/Background/12.jpg";
+import logo from "../../../assets/avatar_2.png";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import frontEnd from "../../../assets/service/f1.svg";
@@ -20,19 +19,16 @@ import ecommerse from "../../../assets/products/ecommerse2.jpg";
 import crm from "../../../assets/products/sassCRM.jpg";
 import cloud from "../../../assets/products/cloudBilling1.jpg";
 import jobPortal from "../../../assets/products/jobPortal.jpg";
-import axios from "axios";
 //Gallery
-// import gallery from "../../../assets/Background/23.jpg";
-// import gallery1 from "../../../assets/Background/24.jpg";
-// import gallery2 from "../../../assets/Background/25.jpg";
-// import gallery3 from "../../../assets/Background/23.jpg";
+import gallery from "../../../assets/Background/12.jpg";
+import gallery1 from "../../../assets/Background/21.jpg";
+import gallery2 from "../../../assets/Background/22.jpg";
+import gallery3 from "../../../assets/Background/12.jpg";
 //Testimonial
-import { Flip, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
 import formContext from "../../Context/FormContext";
-//Fetched form  data;
-
-const DemoCard = () => {
+import axios from "axios";
+const NewCard2 = () => {
   let {
     loader3,
     setLoader3,
@@ -349,7 +345,6 @@ const DemoCard = () => {
     fetchSocialMedia();
     fetchTestimonial();
   }, []);
-
   const buttonStyle = {
     width: "0px",
     background: "none",
@@ -383,8 +378,8 @@ const DemoCard = () => {
   };
   //Testimonial
   const buttonStyle2 = {
-    width: "20px",
-    height: "20px",
+    width: "50px",
+    height: "50px",
     borderRadius: "50%",
     background: "none",
     border: "0px",
@@ -392,29 +387,21 @@ const DemoCard = () => {
   const properties2 = {
     prevArrow: (
       <button style={{ ...buttonStyle2 }}>
-        <img
-          width="48"
-          height="48"
-          src="https://img.icons8.com/fluency/48/back.png"
-          alt="back"
-        />
+     
+       <i className='bx bx-chevron-left bx-fade-right' style={{fontSize:'2.3rem',color:'skyblue'}}  ></i>
+      {/* <img width="18" height="18" src="https://img.icons8.com/fluency/48/back.png" alt="back"/> */}
       </button>
     ),
     nextArrow: (
       <button style={{ ...buttonStyle2 }}>
-        <img
-          width="48"
-          height="48"
-          src="https://img.icons8.com/fluency/48/forward--v2.png"
-          alt="forward--v2"
-        />
+    <i class='bx bx-chevron-right bx-fade-right'style={{fontSize:'2.3rem',color:'skyblue'}}  ></i>
       </button>
     ),
   };
   const buttonStyle1 = {
     width: "0px",
     background: "none",
-    opacity: 0,
+    opacity:0,
     border: "0px",
     padding: "0px",
   };
@@ -442,561 +429,14 @@ const DemoCard = () => {
       </button>
     ),
   };
-
-  //Fetch while cliking edit button:
-  const handleEdit1 = async (e) => {
-    setBasicID(e.target.id);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    setLoader3(true);
-    await axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/basic_detail/specific/${BasicID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Bounce,
-        });
-        setID(res.data.getData._id);
-        setBanner(res.data.getData.banner);
-        setLogo(res.data.getData.logo);
-        setFullName(res.data.getData.fullName);
-        setProfession(res.data.getData.profession);
-        setSummary(res.data.getData.summary);
-        // setBasicData(res.data.result);
-        setBasicEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-      });
-  };
-  //Fetch while cliking Contact Button:
-  const handleEdit2 = async () => {
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    await axios
-
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/contact_detail`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setEmail1(res.data.getContactDetail[0].Email1);
-        setAlternateEmail(res.data.getContactDetail[0].AlternateEmail);
-        setMobileNumber1(res.data.getContactDetail[0].MobileNumber1);
-        setAlternateMobileNumber(
-          res.data.getContactDetail[0].AlternateMobileNumber
-        );
-        setDOB(res.data.getContactDetail[0].DOB);
-        setAddress(res.data.getContactDetail[0].Address);
-        setContactData(res.data.getContactDetail[0]);
-        setContactEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-
-        setLoader3(false);
-      });
-  };
-  //Fetch while cliking Service Button:
-  const handleEdit3 = async (e) => {
-    setData(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    await axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/service_detail/specific/${Data}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setServiceImage(res.data.getServiceDetail.serviceImage);
-        setServiceTitle(res.data.getServiceDetail.serviceTitle);
-        setServiceSummary(res.data.getServiceDetail.serviceSummary);
-        setServiceEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setServiceEdit(false);
-      });
-  };
-
-  //Fetch while cliking Product Button:
-  const handleEdit4 = async (e) => {
-    setProdictId(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    await axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/product_detail/specific/${ProductId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setProductImage(res.data.getProductDetail.productImage);
-        setProductTitle(res.data.getProductDetail.productTitle);
-        setProductSummary(res.data.getProductDetail.productSummary);
-        setProductReleaseDate(res.data.getProductDetail.productReleaseDate);
-        setProductEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.dat.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setProductEdit(false);
-      });
-  };
-
-  //Fetch while cliking Gallery Button:
-  const handleEdit5 = async (e) => {
-    setGallId(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/gallery_detail/specific/${GallId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setGalleryImage(res.data.getGalleryDetail.galleryImage);
-        setVideoURL(res.data.getGalleryDetail.videoURL);
-        // setGalleryData(res.data.getGalleryDetail);
-        setGalleryEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setGalleryEdit(false);
-      });
-  };
-  //Fetch while cliking Gallery Button:
-  const handleDelete5 = async (e) => {
-    setGallId(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-      .delete(
-        `https://user-authentication-fullstack-application.onrender.com/gallery_detail/specific/${GallId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setGalleryEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setGalleryEdit(false);
-      });
-  };
-  //Fetch while cliking SocialMedia Button:
-  const handleEdit6 = async () => {
-    setLoader3(false);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/socialMedia_detail`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.getSocialMediaDetail.length > 0) {
-          toast.success(res.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-
-        if (res.data.getSocialMediaDetail.length <= 0) {
-          toast.error("Data not found", {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-        setFacebook(res.data.getSocialMediaDetail[0].Facebook);
-        setLinkedIn(res.data.getSocialMediaDetail[0].LinkedIn);
-        setWhatsUp(res.data.getSocialMediaDetail[0].WhatsUp);
-        setInstagram(res.data.getSocialMediaDetail[0].Instagram);
-        setTwiter(res.data.getSocialMediaDetail[0].Twiter);
-        setSocialMediaData(res.data.getSocialMediaDetail[0]);
-        setSocialMediaEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-      });
-  };
-  //Fetch while cliking QRCode Button:
-  const handleEdit8 = async (e) => {
-    setQRCodeId(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/qrcode_detail/specific/${QRCodeId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.getGalleryDetail.length > 0) {
-          toast.success(res.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-        if (res.data.getGalleryDetail.length <= 0) {
-          toast.error("Data not found", {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-        setQRCodeImage(res.data.getQRCodeDetails.QRCodeImage);
-        setGalleryEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setGalleryEdit(false);
-      });
-  };
-  //Fetch while cliking Service Button:
-  async function handleDelete3(e) {
-    setData(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    await axios
-      .delete(
-        `https://user-authentication-fullstack-application.onrender.com/service_detail/specific/${Data}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setServiceEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setServiceEdit(false);
-      });
-  }
-  //Fetch while cliking Service Button:
-  async function handleDelete4(e) {
-    setProdictId(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    await axios
-      .delete(
-        `https://user-authentication-fullstack-application.onrender.com/product_detail/specific/${ProductId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setProductEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err.responce.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setProductEdit(false);
-      });
-  }
-  //Fetch while cliking testimonial Button:
-  function handleEdit7(e) {
-    setTestimonialID(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-
-      .get(
-        `https://user-authentication-fullstack-application.onrender.com/testimonial_detail/specific/${TestimonialID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.getTestimonialDetail.length > 0) {
-          toast.success(res.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-
-        if (res.data.getTestimonialDetail.length <= 0) {
-          toast.error("Data not found", {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-
-        setClientName(res.data.getTestimonialDetail.clientName);
-        setClientImage(res.data.getTestimonialDetail.clientImage);
-        setClientFeedbackDate(res.data.getTestimonialDetail.clientFeedbackDate);
-        setClientFeedback(res.data.getTestimonialDetail.clientFeedback);
-        // setTestimonialData(res.data.getTestimonialDetail);
-        setTestimonialEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-      });
-  }
-  //Fetch while cliking testimonial Button:
-  function handleDelete7(e) {
-    setTestimonialID(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-      .delete(
-        `https://user-authentication-fullstack-application.onrender.com/testimonial_detail/specific/${TestimonialID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(re.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setTestimonialEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-      });
-  }
-  //Fetch while cliking QRCode Button:
-  function handleDelete8(e) {
-    setQRCodeId(e.target.id);
-    setLoader3(true);
-    // Retrieve token from local storage or wherever it's stored
-    let id = JSON.parse(localStorage.getItem("token"));
-    axios
-      .delete(
-        `https://user-authentication-fullstack-application.onrender.com/qrcode_detail/specific/${QRCodeId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.data.getQRCodeDetails.length > 0) {
-          toast.success(res.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-        console.log(res.data.getQRCodeDetails);
-        if (res.data.getQRCodeDetails.length <= 0) {
-          toast.error("Data not found", {
-            position: "top-center",
-            autoClose: 2000,
-            transition: Flip,
-          });
-        }
-        setQRCodeImage(res.data.getQRCodeDetails.QRCodeImage);
-        setGalleryEdit(true);
-        setLoader3(false);
-      })
-      .catch((err) => {
-        toast.error(err, {
-          position: "top-center",
-          autoClose: 2000,
-          transition: Flip,
-        });
-        setLoader3(false);
-        setGalleryEdit(false);
-      });
-  }
-
   return (
-    <>
-
-      <div className="demoCard_container">
-        <div className="Demo_card_title">
-          <h4>Live Preview Digital Card Update</h4>
-        </div>
-
+    <div className="newCard_container2">
         {BasicData!= undefined ? (
           <div className="card_box">
             {BasicData.map((data, index) => {
               return (
                 <div className="box-1" key={index}>
-                  <div
-                    className="box_2_edit"
-                    onClick={() => {
-                      setBasicForm(true),
-                        setContactForm(false),
-                        setGalleryForm(false),
-                        setProductForm(false),
-                        setServiceForm(false),
-                        setSocialMediaForm(false),
-                        setTestimonialForm(false);
-                      setQRCodeForm(false);
-                    }}
-                  >
-                    <i
-                      onClick={handleEdit1}
-                      className="uil uil-edit"
-                      ref={serviceRef}
-                      id={data._id}
-                    ></i>
-                  </div>
+              
 
                   <div className="Image_details">
                     <div className="banner">
@@ -1043,26 +483,7 @@ const DemoCard = () => {
 
                   {SocialMediaData != undefined ? (
                     <div className="social_medias">
-                      <div
-                        className="box_2_edit"
-                        onClick={() => {
-                          setBasicForm(false),
-                            setContactForm(false),
-                            setGalleryForm(false),
-                            setProductForm(false),
-                            setServiceForm(false),
-                            setSocialMediaForm(true),
-                            setTestimonialForm(false);
-                          setQRCodeForm(false);
-                        }}
-                      >
-                        <i
-                          onClick={handleEdit6}
-                          className="uil uil-edit"
-                          id={SocialMediaData._id || ""}
-                        ></i>
-                      </div>
-
+                
                       <a href={SocialMediaData.Twiter} target="_blank">
                         <i className="uil uil-globe"></i>
                       </a>
@@ -1087,26 +508,7 @@ const DemoCard = () => {
                   {ContactData != undefined ? (
                     <div>
                       <div className="contact_container">
-                        <div
-                          className="box_2_edit"
-                          onClick={() => {
-                            setBasicForm(false),
-                              setContactForm(true),
-                              setGalleryForm(false),
-                              setProductForm(false),
-                              setServiceForm(false),
-                              setSocialMediaForm(false),
-                              setTestimonialForm(false);
-                            setQRCodeForm(false);
-                          }}
-                        >
-                          <i
-                            onClick={handleEdit2}
-                            className="uil uil-edit"
-                            id={ContactData._id}
-                          ></i>
-                        </div>
-
+                 
                         <div className="contact_title">
                           <h4>Contact</h4>
                         </div>
@@ -1214,33 +616,7 @@ const DemoCard = () => {
                       ? ServiceData.map((data, index) => {
                           return (
                             <div className="list" key={index}>
-                              <div
-                                className="box_2_edit"
-                                onClick={() => {
-                                  setBasicForm(false),
-                                    setContactForm(false),
-                                    setGalleryForm(false),
-                                    setProductForm(false),
-                                    setServiceForm(true),
-                                    setSocialMediaForm(false),
-                                    setTestimonialForm(false);
-                                  setQRCodeForm(false);
-                                }}
-                              >
-                                <i
-                                  onClick={handleEdit3}
-                                  className="uil uil-edit"
-                                  ref={serviceRef}
-                                  id={data._id}
-                                ></i>
-                              </div>
-                              <div className="box_2_delete">
-                                <i
-                                  onClick={handleDelete3}
-                                  class="uil uil-trash-alt"
-                                  id={data._id}
-                                ></i>
-                              </div>
+                           
                               <div className="service_image">
                                 <img src={data.serviceImage} alt="frontEnd" />
                               </div>
@@ -1291,33 +667,7 @@ const DemoCard = () => {
                   return (
                     <div className="box-3" key={index}>
                       <div className="qrCode_container">
-                        <div
-                          className="box_2_edit"
-                          onClick={() => {
-                            setBasicForm(false),
-                              setContactForm(false),
-                              setGalleryForm(false),
-                              setProductForm(false),
-                              setServiceForm(false),
-                              setSocialMediaForm(false),
-                              setTestimonialForm(false);
-                            setQRCodeForm(true);
-                          }}
-                        >
-                          <i
-                            onClick={handleEdit8}
-                            className="uil uil-edit"
-                            id={data._id}
-                          ></i>
-                        </div>
-                        <div className="box_2_delete">
-                          <i
-                            // onClick={handleDelete3}
-                            onClick={handleDelete8}
-                            class="uil uil-trash-alt"
-                            id={data._id}
-                          ></i>
-                        </div>
+                      
                         <div className="qrcode_title">
                           <h4>
                             QR Code <img src={qr3} alt="img" />
@@ -1373,32 +723,7 @@ const DemoCard = () => {
                     {ProductData.map((data, index) => {
                       return (
                         <div className="box" key={index}>
-                          <div
-                            className="box_2_edit"
-                            onClick={() => {
-                              setBasicForm(false),
-                                setContactForm(false),
-                                setGalleryForm(false),
-                                setProductForm(true),
-                                setServiceForm(false),
-                                setSocialMediaForm(false),
-                                setTestimonialForm(false);
-                              setQRCodeForm(false);
-                            }}
-                          >
-                            <i
-                              onClick={handleEdit4}
-                              className="uil uil-edit"
-                              id={data._id}
-                            ></i>
-                          </div>
-                          <div className="box_2_delete">
-                            <i
-                              onClick={handleDelete4}
-                              class="uil uil-trash-alt"
-                              id={data._id}
-                            ></i>
-                          </div>
+                      
 
                           <img src={data.productImage} alt="taxi" />
 
@@ -1444,32 +769,7 @@ const DemoCard = () => {
                     {GalleryData.map((data, index) => {
                       return (
                         <div key={index} className="gall">
-                          <div
-                            className="box_2_edit"
-                            onClick={() => {
-                              setBasicForm(false),
-                                setContactForm(false),
-                                setGalleryForm(true),
-                                setProductForm(false),
-                                setServiceForm(false),
-                                setSocialMediaForm(false),
-                                setTestimonialForm(false);
-                              setQRCodeForm(false);
-                            }}
-                          >
-                            <i
-                              onClick={handleEdit5}
-                              className="uil uil-edit"
-                              id={data._id}
-                            ></i>
-                          </div>
-                          <div className="box_2_delete">
-                            <i
-                              onClick={handleDelete5}
-                              class="uil uil-trash-alt"
-                              id={data._id}
-                            ></i>
-                          </div>
+                       
                           <img
                             src={
                               data.galleryImage != undefined
@@ -1515,32 +815,7 @@ const DemoCard = () => {
                         {TestimonialData.map((data, index) => {
                           return (
                             <div className="slide_1" key={index}>
-                              <div
-                                className="box_2_edit"
-                                onClick={() => {
-                                  setBasicForm(false),
-                                    setContactForm(false),
-                                    setGalleryForm(false),
-                                    setProductForm(false),
-                                    setServiceForm(false),
-                                    setSocialMediaForm(false),
-                                    setTestimonialForm(true);
-                                  setQRCodeForm(false);
-                                }}
-                              >
-                                <i
-                                  onClick={handleEdit7}
-                                  className="uil uil-edit"
-                                  id={data._id}
-                                ></i>
-                              </div>
-                              <div className="box_2_delete">
-                                <i
-                                  onClick={handleDelete7}
-                                  class="uil uil-trash-alt"
-                                  id={data._id}
-                                ></i>
-                              </div>
+                        
                               <img
                                 className="TestimonialImage"
                                 src={data.clientImage || logo}
@@ -1720,9 +995,10 @@ const DemoCard = () => {
         ) : (
           ""
         )}
-      </div>
-    </>
+    </div>
   );
 };
 
-export default DemoCard;
+export default NewCard2;
+
+

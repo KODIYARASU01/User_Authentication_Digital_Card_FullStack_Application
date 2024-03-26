@@ -3,9 +3,9 @@ import "./Loader.scss";
 const Loader = () => {
   return (
     <>
-      {/* <div className="loader_container">
-        <span className="loader2"></span>
-      </div> */}
+      <div className="loader_container">
+        <span className="initial_loader"></span>
+      </div>
     </>
   );
 };

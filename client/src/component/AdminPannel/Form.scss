@@ -1602,6 +1602,26 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  .final_digiCard{
+    position: absolute;
+    bottom: 20%;
+
+    a{
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 0.7rem;
+
+    }
+    @media screen and (max-width:900px){
+      position: absolute;
+      top: 0%;
+      right: 2%;
+    }
+  }
   @media screen and (max-width: 900px) {
     // background-color: aqua;
     min-height: 90vh;

@@ -9,6 +9,7 @@ import whatsup from "../../assets/Social Medias/whatsup.gif";
 import twiter from "../../assets/Social Medias/twiter.gif";
 import insta from "../../assets/Social Medias/insta.gif";
 import clientProfile from "../../assets/avatar_2.png";
+import { Link } from "react-router-dom";
 
 import formContext from "../Context/FormContext.jsx";
 import {
@@ -25,6 +26,11 @@ import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 let Forms = () => {
+  let [id, setId] = useState();
+  useEffect(() => {
+    let id = JSON.parse(localStorage.getItem("token"));
+    setId(id);
+  }, []);
 
   let {
     loader3,
@@ -156,6 +162,7 @@ let Forms = () => {
     QRCodeEdit,
     setQRCodeEdit,
   } = useContext(formContext);
+  console.log(ServiceData.length);
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64Basic(e.target.files[0]);
@@ -212,11 +219,15 @@ let Forms = () => {
       setLoader3(true);
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/basic_detail", data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/basic_detail",
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((responce) => {
           toast.success(responce.data.message, {
             position: "top-center",
@@ -267,11 +278,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/basic_detail/specific/${BasicID}`, data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/basic_detail/specific/${BasicID}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           toast.success(res.data.message, {
@@ -326,11 +341,15 @@ let Forms = () => {
 
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/socialMedia_detail", SocialMediadata, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/socialMedia_detail",
+          SocialMediadata,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           setLoader3(false);
           toast.success(res.data.message, {
@@ -438,11 +457,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/contact_detail", Contactdata, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/contact_detail",
+          Contactdata,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           toast.success(res.data.message, {
@@ -489,11 +512,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/contact_detail/${ContactData._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/contact_detail/${ContactData._id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -542,11 +569,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/service_detail", data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/service_detail",
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -592,11 +623,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/service_detail/specific/${Data}`, data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/service_detail/specific/${Data}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -650,11 +685,15 @@ let Forms = () => {
       // formData2.append("productSummary", productSummary);
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/product_detail", Productdata, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/product_detail",
+          Productdata,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -758,11 +797,15 @@ let Forms = () => {
 
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/gallery_detail", Gallerydata, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/gallery_detail",
+          Gallerydata,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -807,11 +850,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/gallery_detail/specific/${GallId}`, data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/gallery_detail/specific/${GallId}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -821,7 +868,7 @@ let Forms = () => {
 
           setLoader3(false);
           setGalleryImage(undefined);
-          setVideoURL('')
+          setVideoURL("");
           setGalleryEdit(false);
         })
         .catch((err) => {
@@ -860,11 +907,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(`https://user-authentication-fullstack-application.onrender.com/testimonial_detail`, SocialMediadata, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          `https://user-authentication-fullstack-application.onrender.com/testimonial_detail`,
+          SocialMediadata,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -967,11 +1018,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://user-authentication-fullstack-application.onrender.com/qrcode_detail", data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .post(
+          "https://user-authentication-fullstack-application.onrender.com/qrcode_detail",
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -1014,11 +1069,15 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://user-authentication-fullstack-application.onrender.com/qrcode_detail/specific/${QRCodeId}`, data, {
-          headers: {
-            Authorization: `Bearer ${id.token}`,
-          },
-        })
+        .put(
+          `https://user-authentication-fullstack-application.onrender.com/qrcode_detail/specific/${QRCodeId}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${id.token}`,
+            },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -1506,11 +1565,15 @@ let Forms = () => {
 
               {GalleryEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleGalleryEdit}>Update{loader3 ? <span className="loader3"></span> : ""}</button>
+                  <button onClick={handleGalleryEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload{loader3 ? <span className="loader3"></span> : ""}</button>
+                  <button type="submit">
+                    Upload{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
@@ -1693,11 +1756,15 @@ let Forms = () => {
 
               {TestimonialEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleTestimonialEdit}>Update{loader3 ? <span className="loader3"></span> : ""}</button>
+                  <button onClick={handleTestimonialEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload{loader3 ? <span className="loader3"></span> : ""}</button>
+                  <button type="submit">
+                    Upload{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
@@ -1738,14 +1805,35 @@ let Forms = () => {
               </div>
               {QRCodeEdit === true ? (
                 <div className="form_submit">
-                  <button onClick={handleQRCodeEdit}>Update{loader3 ? <span className="loader3"></span> : ""}</button>
+                  <button onClick={handleQRCodeEdit}>
+                    Update{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               ) : (
                 <div className="form_submit">
-                  <button type="submit">Upload{loader3 ? <span className="loader3"></span> : ""}</button>
+                  <button type="submit">
+                    Upload{loader3 ? <span className="loader3"></span> : ""}
+                  </button>
                 </div>
               )}
             </form>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {BasicData != undefined &&
+        ContactData != undefined &&
+        SocialMediaData != undefined &&
+        ServiceData.length >= 1 &&
+        ProductData.length >= 1 &&
+        GalleryData.length >= 1 &&
+        TestimonialData.length >= 1 ? (
+          <div className="final_digiCard">
+            <Link to={`/${id ? id.user : ""}`} target="_blank">
+              <i className="bx bxs-hand-right bx-flashing"></i>Get Your Digital
+              Card
+            </Link>
           </div>
         ) : (
           ""

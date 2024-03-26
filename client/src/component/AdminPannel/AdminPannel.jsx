@@ -175,7 +175,6 @@ const AdminPannel = () => {
   useEffect(() => {
     setLoader(true);
     let id = JSON.parse(localStorage.getItem("token"));
-
     axios
       .get(
         `https://user-authentication-fullstack-application.onrender.com/userData/${id.id}`,
@@ -223,6 +222,7 @@ const AdminPannel = () => {
         console.log(error.message);
       });
   }, []);
+  
   let navigate = useNavigate();
 
   //Formik does not support file upload so we could create handler :
@@ -371,7 +371,7 @@ const AdminPannel = () => {
               src={profile != undefined ? profile : logo1}
               alt="logo"
               onClick={() => {
-                setProfileView(!profileView), setSlideShow(true);
+                setProfileView(!profileView);
               }}
             />
           </m.div>
