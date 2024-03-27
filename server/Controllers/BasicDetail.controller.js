@@ -13,6 +13,7 @@ export const postData = async (req, res) => {
         fullName: req.body.fullName,
         profession: req.body.profession,
         summary: req.body.summary,
+        userToken:req.body.userToken
       });
 
       const result = await newData.save();

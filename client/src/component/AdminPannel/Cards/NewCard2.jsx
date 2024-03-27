@@ -30,6 +30,10 @@ import formContext from "../../Context/FormContext";
 import axios from "axios";
 const NewCard2 = () => {
   let {
+    userToken,
+    setUserToken,
+    user,
+    setUser,
     loader3,
     setLoader3,
     Data,
@@ -161,17 +165,24 @@ const NewCard2 = () => {
     setQRCodeEdit,
   } = useContext(formContext);
   let serviceRef = useRef(null);
-
+ // Function to strip HTML tags from a string
+ const stripHtmlTags = (html) => {
+  if (html === null) {
+    return ''; // Return an empty string if html is null
+  }
+  const strippedHtml = html.replace(/(<([^>]+)>)/gi, '');
+  return strippedHtml;
+};
   // Retrieve token from local storage or wherever it's stored
   let id = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
     let fetch = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/basic_detail/`,
+          `http://localhost:3001/basic_detail/`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -189,10 +200,10 @@ const NewCard2 = () => {
     let socialmedia = async () => {
       await axios
         .get(
-          "https://user-authentication-fullstack-application.onrender.com/socialMedia_detail",
+          "http://localhost:3001/socialMedia_detail?id=33455",
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -210,10 +221,10 @@ const NewCard2 = () => {
     let contactDetail = async () => {
       await axios
         .get(
-          "https://user-authentication-fullstack-application.onrender.com/contact_detail",
+          "http://localhost:3001/contact_detail",
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -231,10 +242,10 @@ const NewCard2 = () => {
     let fetchService = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/service_detail`,
+          `http://localhost:3001/service_detail`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -249,10 +260,10 @@ const NewCard2 = () => {
     let fetchQRCode = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/qrcode_detail`,
+          `http://localhost:3001/qrcode_detail`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -266,10 +277,10 @@ const NewCard2 = () => {
     let fetchProduct = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/product_detail`,
+          `http://localhost:3001/product_detail`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -284,10 +295,10 @@ const NewCard2 = () => {
     let fetchGallery = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/gallery_detail`,
+          `http://localhost:3001/gallery_detail`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -302,10 +313,10 @@ const NewCard2 = () => {
     let fetchSocialMedia = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/socialMedia_detail`,
+          `http://localhost:3001/socialMedia_detail`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -320,10 +331,10 @@ const NewCard2 = () => {
     let fetchTestimonial = async () => {
       await axios
         .get(
-          `https://user-authentication-fullstack-application.onrender.com/testimonial_detail`,
+          `http://localhost:3001/testimonial_detail`,
           {
             headers: {
-              Authorization: `Bearer ${id.token}`,
+              Authorization: `Bearer ${userToken}`,
             },
           }
         )
@@ -436,18 +447,7 @@ const NewCard2 = () => {
             {BasicData.map((data, index) => {
               return (
                 <div className="box-1" key={index}>
-              
-
-                  <div className="Image_details">
-                    <div className="banner">
-                      <img src={data.banner || background} alt="banner" />
-                    </div>
-                    <div className="logo">
-                      <img src={data.logo || avatar} alt="avatar" />
-                    </div>
-                  </div>
-                  {ContactData != undefined ? (
-                    <svg
+                 <svg
                       className="svg_top"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 1440 320"
@@ -458,11 +458,19 @@ const NewCard2 = () => {
                         d="M0,160L80,176C160,192,320,224,480,213.3C640,203,800,149,960,149.3C1120,149,1280,203,1360,229.3L1440,256L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
                       ></path>
                     </svg>
-                  ) : (
-                    ""
-                  )}
+
+                  <div className="Image_details">
+                    <div className="banner">
+                      <img src={data.banner || background} alt="banner" />
+                    </div>
+                    <div className="logo">
+                      <img src={data.logo || avatar} alt="avatar" />
+                    </div>
+                  </div>
+               
 
                   <div className="basic_details">
+               
                     <div className="author_name">
                       <h4>{data.fullName || "Jayakumar "}</h4>
                     </div>
@@ -473,7 +481,7 @@ const NewCard2 = () => {
                     </div>
                     <div className="summary">
                       <p>
-                        {data.summary ||
+                        {stripHtmlTags(data.summary )||
                           `We're designers, developers, engineers, marketers, and pretty
     much everything else for your business need. However, it is not
     how we choose to introduce ourselves.`}
@@ -627,7 +635,7 @@ const NewCard2 = () => {
                               </div>
                               <div className="service_detail">
                                 <p>
-                                  {data.serviceSummary ||
+                                  {stripHtmlTags(data.serviceSummary ) ||
                                     `   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                       Voluptas maxime sapiente dolorum nemo nobis eveniet quaerat
                       provident rem ut enim esse, necessitatibus praesentium
@@ -651,7 +659,12 @@ const NewCard2 = () => {
             {/* Box-3 QRCode */}
             {QRCodeData.length >= 1 ? (
               <div>
-                <svg
+          
+
+                {QRCodeData.map((data, index) => {
+                  return (
+                    <div className="box-3" key={index}>
+                            <svg
                   className="svg_top"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 1440 320"
@@ -662,10 +675,6 @@ const NewCard2 = () => {
                     d="M0,64L34.3,85.3C68.6,107,137,149,206,165.3C274.3,181,343,171,411,160C480,149,549,139,617,160C685.7,181,754,235,823,245.3C891.4,256,960,224,1029,197.3C1097.1,171,1166,149,1234,122.7C1302.9,96,1371,64,1406,48L1440,32L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"
                   ></path>
                 </svg>
-
-                {QRCodeData.map((data, index) => {
-                  return (
-                    <div className="box-3" key={index}>
                       <div className="qrCode_container">
                       
                         <div className="qrcode_title">
@@ -735,7 +744,7 @@ const NewCard2 = () => {
                           </div>
                           <div className="product_summary">
                             <p>
-                              {data.productSummary ||
+                              {stripHtmlTags(data.productSummary ) ||
                                 `  Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Recusandae expedita illo totam, corrupti est impedit!`}
                             </p>
@@ -791,15 +800,16 @@ const NewCard2 = () => {
             {/* Box-6 Testimonial */}
 
             {TestimonialData.length >= 1 ? (
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+              <div className="testimonial_con">
+          
+                <div className="box-5">
+                <svg className="testimonial_wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                   <path
                     fill="#003253"
                     fillOpacity="1"
                     d="M0,192L480,64L960,224L1440,64L1440,320L960,320L480,320L0,320Z"
                   ></path>
                 </svg>
-                <div className="box-5">
                   <div className="testimonial_container">
                     <div className="testimonial_title">
                       <h4>Testimonials</h4>
@@ -826,7 +836,7 @@ const NewCard2 = () => {
                                   {data.clientName || "Marry"}
                                 </p>
                                 <small>
-                                  {data.clientFeedback ||
+                                  {stripHtmlTags(data.clientFeedback ) ||
                                     ` Lorem, ipsum dolor sit amet consectetur adipisicing
                           elit. Sunt dolores maiores nam quisquam magni
                           provident labore laboriosam asperiores culpa

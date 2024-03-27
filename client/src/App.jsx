@@ -1,20 +1,21 @@
-import React, { useState, useEffect, lazy,Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import "./App.css";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import formContext from "./component/Context/FormContext";
 
-
-let SignIn=lazy(()=>import('./component/User_Auth/SignIn'));
-let SignUp=lazy(()=>import('./component/User_Auth/SignUp'));
-let UserDetail=lazy(()=>import('./component/UserDetail/UserDetail'));
-let AdminPannel=lazy(()=>import('./component/AdminPannel/AdminPannel'));
-let NewCard2=lazy(()=>import('./component/AdminPannel/Cards/NewCard2'));
-let Loader=lazy(()=>import('./component/Loader/Loader'));
+let SignIn = lazy(() => import("./component/User_Auth/SignIn"));
+let SignUp = lazy(() => import("./component/User_Auth/SignUp"));
+let UserDetail = lazy(() => import("./component/UserDetail/UserDetail"));
+let AdminPannel = lazy(() => import("./component/AdminPannel/AdminPannel"));
+let NewCard2 = lazy(() => import("./component/AdminPannel/Cards/NewCard2"));
+let Loader = lazy(() => import("./component/Loader/Loader"));
 
 const App = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  let[loader3,setLoader3]=useState(false);
+
+  let [userToken, setUserToken] = useState("");
+  let [loader3, setLoader3] = useState(false);
   // State to store user authentication
   let [UserDetails, setUserDetails] = useState([]);
   let [show, setShow] = useState(false);
@@ -28,130 +29,132 @@ const App = () => {
   let [loader, setLoader] = useState(false);
   //Profile view toggle state:
   const [profileView, setProfileView] = useState(false);
-//New
-let [userDetail, setUserDetail] = useState();
-let [isLoading, setIsLoading] = useState(true);
-useEffect(() => {
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 500);
-});
-let [Data, setData] = useState("");
-let [BasicID, setBasicID] = useState("");
-let [ProductId, setProdictId] = useState("");
-let [QRCodeId, setQRCodeId] = useState("");
-let [GallId, setGallId] = useState("");
-let [TestimonialID, setTestimonialID] = useState("");
-//States all
-let [slideClose, setSlideShow] = useState(false);
-let [basicForm, setBasicForm] = useState(true);
-let [contactForm, setContactForm] = useState(false);
-let [serviceForm, setServiceForm] = useState(false);
-let [productForm, setProductForm] = useState(false);
-let [galleryForm, setGalleryForm] = useState(false);
-let [socialMediaForm, setSocialMediaForm] = useState(false);
-let [testimonialForm, setTestimonialForm] = useState(false);
-let [QRCodeForm, setQRCodeForm] = useState(false);
+  //New
+  let [userDetail, setUserDetail] = useState();
 
-//Basic Detail form states:
-let [banner, setBanner] = useState();
-let [logo, setLogo] = useState();
-let [fullName, setFullName] = useState();
-let [profession, setProfession] = useState();
-let [summary, setSummary] = useState();
-
-//Contact Detail form States:
-
-let [Email1, setEmail1] = useState();
-let [AlternateEmail, setAlternateEmail] = useState();
-let [MobileNumber1, setMobileNumber1] = useState();
-let [AlternateMobileNumber, setAlternateMobileNumber] = useState();
-let [DOB, setDOB] = useState();
-let [Address, setAddress] = useState();
-
-//Service etail form states:
-
-let [serviceImage, setServiceImage] = useState();
-
-let [serviceTitle, setServiceTitle] = useState();
-let [serviceSummary, setServiceSummary] = useState();
-
-//Product detail form states:
-let [productImage, setProductImage] = useState();
-let [productTitle, setProductTitle] = useState();
-let [productReleaseDate, setProductReleaseDate] = useState();
-let [productSummary, setProductSummary] = useState();
-
-//Gallery:
-let [galleryImage, setGalleryImage] = useState();
-let [videoURL, setVideoURL] = useState();
-
-//SOcialMedia :
-
-let [Facebook, setFacebook] = useState();
-let [LinkedIn, setLinkedIn] = useState();
-let [WhatsUp, setWhatsUp] = useState();
-let [Instagram, setInstagram] = useState();
-let [Twiter, setTwiter] = useState();
-
-//Testimonial:
-let [clientImage, setClientImage] = useState();
-let [clientName, setClientName] = useState();
-let [clientFeedbackDate, setClientFeedbackDate] = useState();
-let [clientFeedback, setClientFeedback] = useState();
-
-//QRCODE:
-
-let [QRCodeImage, setQRCodeImage] = useState();
-//Fetch data from mongoDb:
-
-let [ID, setID] = useState([]);
-let [loader2, setLoader2] = useState(false);
-
-let [BasicData, setBasicData] = useState([]);
-
-let [ContactData, setContactData] = useState([]);
-
-let [ServiceData, setServiceData] = useState([]);
-
-let [ProductData, setProductData] = useState([]);
-
-let [GalleryData, setGalleryData] = useState([]);
-
-let [SocialMediaData, setSocialMediaData] = useState([]);
-
-let [TestimonialData, setTestimonialData] = useState([]);
-
-let [QRCodeData, setQRCodeData] = useState([]);
-
-//Edit Data:
-let [BasicEdit, setBasicEdit] = useState(false);
-
-let [ContactEdit, setContactEdit] = useState(false);
-
-let [ServiceEdit, setServiceEdit] = useState(false);
-
-let [ProductEdit, setProductEdit] = useState(false);
-
-let [GalleryEdit, setGalleryEdit] = useState(false);
-
-let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
-
-let [TestimonialEdit, setTestimonialEdit] = useState(false);
-let [QRCodeEdit, setQRCodeEdit] = useState(false);
-const userToken = JSON.parse(localStorage.getItem("token"));
+  let [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("token"));
-    if (userToken) {
-      setUser(userToken);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  });
+  let [Data, setData] = useState("");
+  let [BasicID, setBasicID] = useState("");
+  let [ProductId, setProdictId] = useState("");
+  let [QRCodeId, setQRCodeId] = useState("");
+  let [GallId, setGallId] = useState("");
+  let [TestimonialID, setTestimonialID] = useState("");
+  //States all
+  let [slideClose, setSlideShow] = useState(false);
+  let [basicForm, setBasicForm] = useState(true);
+  let [contactForm, setContactForm] = useState(false);
+  let [serviceForm, setServiceForm] = useState(false);
+  let [productForm, setProductForm] = useState(false);
+  let [galleryForm, setGalleryForm] = useState(false);
+  let [socialMediaForm, setSocialMediaForm] = useState(false);
+  let [testimonialForm, setTestimonialForm] = useState(false);
+  let [QRCodeForm, setQRCodeForm] = useState(false);
+
+  //Basic Detail form states:
+  let [banner, setBanner] = useState();
+  let [logo, setLogo] = useState();
+  let [fullName, setFullName] = useState();
+  let [profession, setProfession] = useState();
+  let [summary, setSummary] = useState();
+
+  //Contact Detail form States:
+
+  let [Email1, setEmail1] = useState();
+  let [AlternateEmail, setAlternateEmail] = useState();
+  let [MobileNumber1, setMobileNumber1] = useState();
+  let [AlternateMobileNumber, setAlternateMobileNumber] = useState();
+  let [DOB, setDOB] = useState();
+  let [Address, setAddress] = useState();
+
+  //Service etail form states:
+
+  let [serviceImage, setServiceImage] = useState();
+
+  let [serviceTitle, setServiceTitle] = useState();
+  let [serviceSummary, setServiceSummary] = useState();
+
+  //Product detail form states:
+  let [productImage, setProductImage] = useState();
+  let [productTitle, setProductTitle] = useState();
+  let [productReleaseDate, setProductReleaseDate] = useState();
+  let [productSummary, setProductSummary] = useState();
+
+  //Gallery:
+  let [galleryImage, setGalleryImage] = useState();
+  let [videoURL, setVideoURL] = useState();
+
+  //SOcialMedia :
+
+  let [Facebook, setFacebook] = useState();
+  let [LinkedIn, setLinkedIn] = useState();
+  let [WhatsUp, setWhatsUp] = useState();
+  let [Instagram, setInstagram] = useState();
+  let [Twiter, setTwiter] = useState();
+
+  //Testimonial:
+  let [clientImage, setClientImage] = useState();
+  let [clientName, setClientName] = useState();
+  let [clientFeedbackDate, setClientFeedbackDate] = useState();
+  let [clientFeedback, setClientFeedback] = useState();
+
+  //QRCODE:
+
+  let [QRCodeImage, setQRCodeImage] = useState();
+  //Fetch data from mongoDb:
+
+  let [ID, setID] = useState([]);
+  let [loader2, setLoader2] = useState(false);
+
+  let [BasicData, setBasicData] = useState([]);
+
+  let [ContactData, setContactData] = useState([]);
+
+  let [ServiceData, setServiceData] = useState([]);
+
+  let [ProductData, setProductData] = useState([]);
+
+  let [GalleryData, setGalleryData] = useState([]);
+
+  let [SocialMediaData, setSocialMediaData] = useState([]);
+
+  let [TestimonialData, setTestimonialData] = useState([]);
+
+  let [QRCodeData, setQRCodeData] = useState([]);
+
+  //Edit Data:
+  let [BasicEdit, setBasicEdit] = useState(false);
+
+  let [ContactEdit, setContactEdit] = useState(false);
+
+  let [ServiceEdit, setServiceEdit] = useState(false);
+
+  let [ProductEdit, setProductEdit] = useState(false);
+
+  let [GalleryEdit, setGalleryEdit] = useState(false);
+
+  let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
+
+  let [TestimonialEdit, setTestimonialEdit] = useState(false);
+  let [QRCodeEdit, setQRCodeEdit] = useState(false);
+  const Token = JSON.parse(localStorage.getItem("token"));
+  useEffect(() => {
+    const Token = JSON.parse(localStorage.getItem("token"));
+    if (Token) {
+      setUser(Token);
+      setUserToken(Token.token);
     }
   }, [navigate]); // Load user from localStorage on component mount
-  console.log(user)
   return (
     <>
-    
       <formContext.Provider
         value={{
+          userToken,
+          setUserToken,
           UserDetails,
           setUserDetails,
           user,
@@ -188,7 +191,7 @@ const userToken = JSON.parse(localStorage.getItem("token"));
           setGallId,
           TestimonialID,
           setTestimonialID,
-  
+
           slideClose,
           setSlideShow,
           basicForm,
@@ -310,31 +313,31 @@ const userToken = JSON.parse(localStorage.getItem("token"));
         }}
       >
         <Suspense fallback={<h4>Loading.....</h4>}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              user ? <Navigate to={`/admin/${user.id}`} /> : <SignIn />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              user ? <Navigate to={`/admin/${user.id}`} /> : <SignUp />
-            }
-          />
-          <Route
-            path="/user-detail/:id"
-            element={user ? <UserDetail /> : <Navigate to={"/"} />}
-          />
-          <Route path="admin/:id" element={user ? <AdminPannel /> :<Navigate to={"/"} />}/>
-          //{" "}
-
-          <Route path={user ? user.user:'/'} element={user?<NewCard2/>:<Navigate to={"/"}/>}/>
-          {/* You can use your authRoutes with useAuthRoutes hook here if needed */}
-        </Routes>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                user ? <Navigate to={`/admin/${user.id}`} /> : <SignIn />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                user ? <Navigate to={`/admin/${user.id}`} /> : <SignUp />
+              }
+            />
+            <Route
+              path="/user-detail/:id"
+              element={user ? <UserDetail /> : <Navigate to={"/"} />}
+            />
+            <Route
+              path="admin/:id"
+              element={user ? <AdminPannel /> : <Navigate to={"/"} />}
+            />
+           <Route path={user ? user.user:'/'} element={user?<NewCard2/>:<Navigate to={"/"}/>}/>
+            {/* You can use your authRoutes with useAuthRoutes hook here if needed */}
+          </Routes>
         </Suspense>
-    
       </formContext.Provider>
     </>
   );

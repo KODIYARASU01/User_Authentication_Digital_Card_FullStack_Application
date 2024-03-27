@@ -60,11 +60,10 @@ let {
       lastName,
       email,
       password,
-      location,
       mobileNumber,
     };
     await axios
-      .post("https://user-authentication-fullstack-application.onrender.com/auth/register", data)
+      .post("http://localhost:3001/auth/register", data)
       .then((res) => {
         console.log(res);
         setLoader(false);
@@ -236,21 +235,7 @@ let {
                   )}
                 </div>
               </div>
-              {/* //Location */}
-              <div className="form_group">
-                <label htmlFor="location">Location</label>
-                <input
-                  type="text"
-                  placeholder="Eg : TamilNadu,Chennai"
-                  name="location"
-                  id="location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-                <div className="icon">
-                  <i className="bx bx-current-location bx-rotate-90"></i>
-                </div>
-              </div>
+    
               {/* MobileNumber`` */}
               <div className="form_group">
                 <label htmlFor="lastName">Mobile Number</label>

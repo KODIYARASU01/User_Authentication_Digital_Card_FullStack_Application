@@ -8,7 +8,7 @@ import linkedin from "../../assets/Social Medias/linkedin.gif";
 import whatsup from "../../assets/Social Medias/whatsup.gif";
 import twiter from "../../assets/Social Medias/twiter.gif";
 import insta from "../../assets/Social Medias/insta.gif";
-import clientProfile from "../../assets/avatar_2.png";
+import clientProfile from "../../assets/logo2.jpg";
 import { Link } from "react-router-dom";
 
 import formContext from "../Context/FormContext.jsx";
@@ -24,6 +24,9 @@ import {
 import axios from "axios";
 import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Editor } from "primereact/editor";
+
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 let Forms = () => {
   let [id, setId] = useState();
@@ -33,6 +36,9 @@ let Forms = () => {
   }, []);
 
   let {
+    user,
+    userToken,
+    setUserToken,
     loader3,
     setLoader3,
     Data,
@@ -162,7 +168,167 @@ let Forms = () => {
     QRCodeEdit,
     setQRCodeEdit,
   } = useContext(formContext);
-  console.log(ServiceData.length);
+  let id1 = JSON.parse(localStorage.getItem("token"));
+  useEffect(() => {
+    let fetch = async () => {
+      setLoader3(true);
+      await axios
+        .get(`http://localhost:3001/basic_detail/`, {
+          headers: {
+            Authorization: `Bearer ${id1.token}`,
+          },
+        })
+        .then((res) => {
+          setBanner(res.data.result[0].banner);
+          setLogo(res.data.result[0].logo);
+          setFullName(res.data.result[0].fullName);
+          setProfession(res.data.result[0].profession);
+          setSummary(res.data.result[0].summary);
+          setBasicID(res.data.result[0]._id);
+          setLoader3(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoader3(false);
+        });
+    };
+    let socialmedia = async () => {
+      await axios
+        .get("http://localhost:3001/socialMedia_detail", {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setFacebook(res.data.getSocialMediaDetail[0].Facebook);
+          setInstagram(res.data.getSocialMediaDetail[0].Instagram);
+          setTwiter(res.data.getSocialMediaDetail[0].Twiter);
+          setWhatsUp(res.data.getSocialMediaDetail[0].WhatsUp);
+          setLinkedIn(res.data.getSocialMediaDetail[0].LinkedIn);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let contactDetail = async () => {
+      await axios
+        .get("http://localhost:3001/contact_detail", {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data.getContactDetail[0]);
+          setEmail1(res.data.getContactDetail[0].Email1);
+          setAlternateEmail(res.data.getContactDetail[0].AlternateEmail);
+          setMobileNumber1(res.data.getContactDetail[0].MobileNumber1);
+          setAlternateMobileNumber(res.data.getContactDetail[0].AlternateMobileNumber);
+          setDOB(res.data.getContactDetail[0].DOB);
+          setAddress(res.data.getContactDetail[0].Address)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let fetchService = async () => {
+      await axios
+        .get(`http://localhost:3001/service_detail`, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setServiceData(res.data.getServiceDetail);
+          // setServiceData(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let fetchQRCode = async () => {
+      await axios
+        .get(`http://localhost:3001/qrcode_detail`, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setQRCodeData(res.data.getQRCodeDetails);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let fetchProduct = async () => {
+      await axios
+        .get(`http://localhost:3001/product_detail`, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setProductData(res.data.getProductDetail);
+          // setServiceData(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let fetchGallery = async () => {
+      await axios
+        .get(`http://localhost:3001/gallery_detail`, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setGalleryData(res.data.getGalleryDetail);
+          // setServiceData(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let fetchSocialMedia = async () => {
+      await axios
+        .get(`http://localhost:3001/socialMedia_detail`, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setSocialMediaData(res.data.getSocialMediaDetail);
+          // setServiceData(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    let fetchTestimonial = async () => {
+      await axios
+        .get(`http://localhost:3001/testimonial_detail`, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
+        .then((res) => {
+          setTestimonialData(res.data.getTestimonialDetail);
+          // setServiceData(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetch();
+    socialmedia();
+    contactDetail();
+    // fetchService();
+    // fetchQRCode();
+    // fetchProduct();
+    // fetchGallery();
+    // fetchSocialMedia();
+    // fetchTestimonial();
+  }, []);
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64Basic(e.target.files[0]);
@@ -215,19 +381,16 @@ let Forms = () => {
         fullName,
         profession,
         summary,
+        userToken,
       };
       setLoader3(true);
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/basic_detail",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/basic_detail", data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((responce) => {
           toast.success(responce.data.message, {
             position: "top-center",
@@ -235,11 +398,6 @@ let Forms = () => {
             transition: Flip,
           });
           setLoader3(false);
-          setFullName("");
-          setProfession("");
-          setSummary("");
-          setBanner(undefined);
-          setLogo(undefined);
         })
         .catch((err) => {
           toast.error(err.response.data.message, {
@@ -278,15 +436,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://user-authentication-fullstack-application.onrender.com/basic_detail/specific/${BasicID}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .put(`http://localhost:3001/basic_detail/specific/${BasicID}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           console.log(res);
           toast.success(res.data.message, {
@@ -295,11 +449,6 @@ let Forms = () => {
             transition: Flip,
           });
           setLoader3(false);
-          setLogo(undefined);
-          setFullName("");
-          setProfession("");
-          setSummary("");
-          setBanner(undefined);
         })
         .catch((err) => {
           toast.error(err.response.data.message, {
@@ -309,9 +458,7 @@ let Forms = () => {
           });
           setLoader3(false);
         });
-      setFullName("");
-      setProfession("");
-      setSummary("");
+
       setLoader3(false);
     } catch (error) {
       // Handle errors
@@ -328,7 +475,7 @@ let Forms = () => {
     e.preventDefault();
 
     try {
-      setLoader3(true);
+   
       // Retrieve token from local storage or wherever it's stored
       let id = JSON.parse(localStorage.getItem("token"));
       let SocialMediadata = {
@@ -338,18 +485,14 @@ let Forms = () => {
         Instagram,
         Twiter,
       };
-
+      setLoader3(true);
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/socialMedia_detail",
-          SocialMediadata,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/socialMedia_detail", SocialMediadata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           setLoader3(false);
           toast.success(res.data.message, {
@@ -358,11 +501,6 @@ let Forms = () => {
             transition: Flip,
           });
           setLoader3(false);
-          setFacebook("");
-          setLinkedIn("");
-          setWhatsUp("");
-          setInstagram("");
-          setTwiter("");
         })
         .catch((error) => {
           console.log(error.message);
@@ -401,7 +539,7 @@ let Forms = () => {
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://user-authentication-fullstack-application.onrender.com/socialMedia_detail/${SocialMediaData._id}`,
+          `http://localhost:3001/socialMedia_detail/${SocialMediaData._id}`,
           data,
           {
             headers: {
@@ -457,15 +595,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/contact_detail",
-          Contactdata,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/contact_detail", Contactdata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           console.log(res);
           toast.success(res.data.message, {
@@ -474,12 +608,6 @@ let Forms = () => {
             transition: Flip,
           });
           setLoader3(false);
-          setMobileNumber1("");
-          setAlternateMobileNumber("");
-          setEmail1("");
-          setAlternateEmail("");
-          setDOB("");
-          setAddress("");
         })
         .catch((error) => {
           toast.error(error.response.data.message, {
@@ -512,15 +640,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://user-authentication-fullstack-application.onrender.com/contact_detail/${ContactData._id}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .put(`http://localhost:3001/contact_detail/${ContactData._id}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -569,15 +693,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/service_detail",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/service_detail", data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -623,15 +743,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://user-authentication-fullstack-application.onrender.com/service_detail/specific/${Data}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .put(`http://localhost:3001/service_detail/specific/${Data}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -685,15 +801,11 @@ let Forms = () => {
       // formData2.append("productSummary", productSummary);
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/product_detail",
-          Productdata,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/product_detail", Productdata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -740,7 +852,7 @@ let Forms = () => {
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://user-authentication-fullstack-application.onrender.com/product_detail/specific/${ProductId}`,
+          `http://localhost:3001/product_detail/specific/${ProductId}`,
           data,
           {
             headers: {
@@ -797,15 +909,11 @@ let Forms = () => {
 
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/gallery_detail",
-          Gallerydata,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/gallery_detail", Gallerydata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -850,15 +958,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://user-authentication-fullstack-application.onrender.com/gallery_detail/specific/${GallId}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .put(`http://localhost:3001/gallery_detail/specific/${GallId}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -907,15 +1011,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          `https://user-authentication-fullstack-application.onrender.com/testimonial_detail`,
-          SocialMediadata,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post(`http://localhost:3001/testimonial_detail`, SocialMediadata, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -963,7 +1063,7 @@ let Forms = () => {
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://user-authentication-fullstack-application.onrender.com/testimonial_detail/specific/${TestimonialID}`,
+          `http://localhost:3001/testimonial_detail/specific/${TestimonialID}`,
           data,
           {
             headers: {
@@ -1018,15 +1118,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .post(
-          "https://user-authentication-fullstack-application.onrender.com/qrcode_detail",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .post("http://localhost:3001/qrcode_detail", data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -1069,15 +1165,11 @@ let Forms = () => {
       };
       // Make authenticated request with bearer token
       await axios
-        .put(
-          `https://user-authentication-fullstack-application.onrender.com/qrcode_detail/specific/${QRCodeId}`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${id.token}`,
-            },
-          }
-        )
+        .put(`http://localhost:3001/qrcode_detail/specific/${QRCodeId}`, data, {
+          headers: {
+            Authorization: `Bearer ${id.token}`,
+          },
+        })
         .then((res) => {
           toast.success(res.data.message, {
             position: "top-center",
@@ -1148,9 +1240,15 @@ let Forms = () => {
                     alt=""
                     name="banner"
                   />
+                  {banner === undefined ? (
+                    <i className="bx bx-upload bx-flashing failed"></i>
+                  ) : (
+                    <i className="bx bx-check success"></i>
+                  )}
                 </label>
 
                 <input
+                  multiple
                   type="file"
                   name="banner"
                   id="banner"
@@ -1167,12 +1265,15 @@ let Forms = () => {
                     name="logo"
                     className="logo"
                   />
-                  {/* <img
-                    src={upload}
-                    alt="upload"
-                    className="upload_logo"
-                    name="logo"
-                  /> */}
+                  {logo === undefined ? (
+                    <i className="bx bx-upload bx-flashing  upload_logo">
+                      Upload
+                    </i>
+                  ) : (
+                    <i className="bx bx-check-double upload_logo_success">
+                      Uploaded
+                    </i>
+                  )}
                 </label>
 
                 <input onChange={onUpload} type="file" name="logo" id="logo" />
@@ -1203,18 +1304,24 @@ let Forms = () => {
               </div>
               <div className="form_group">
                 <label htmlFor="summary">Summary</label>
-                <textarea
+                {/* <textarea
                   name="summary"
                   id=""
                   cols="30"
-                  rows="4"
+                  rows="6"
                   placeholder="Write something about your profession"
                   value={summary}
                   onChange={(e) => setSummary(e.target.value)}
-                ></textarea>
+                ></textarea> */}
+                <Editor
+                  placeholder="Start Typing..."
+                  value={summary}
+                  onTextChange={(e) => setSummary(e.htmlValue)}
+                  style={{ height: "150px" }}
+                />
               </div>
 
-              {BasicEdit === true ? (
+              {BasicData && BasicData.length === 1 ? (
                 <div className="form_submit">
                   <button onClick={handleBasicFormEdit}>
                     Update{loader3 ? <span className="loader3"></span> : ""}
@@ -1307,7 +1414,7 @@ let Forms = () => {
               </div>
               <div className="form_group">
                 <label htmlFor="address">Address</label>
-                <textarea
+                {/* <textarea
                   name="address"
                   id=""
                   cols="30"
@@ -1315,10 +1422,16 @@ let Forms = () => {
                   placeholder="Write your location Address"
                   value={Address}
                   onChange={(e) => setAddress(e.target.value)}
-                ></textarea>
+                ></textarea> */}
+                <Editor
+                  placeholder="Start Typing..."
+                  value={Address}
+                  onTextChange={(e) => setAddress(e.htmlValue)}
+                  style={{ height: "100px" }}
+                />
               </div>
 
-              {ContactEdit === true ? (
+              {ContactData ? (
                 <div className="form_submit">
                   <button onClick={handleContactFormEdit}>
                     Update{loader3 ? <span className="loader3"></span> : ""}
@@ -1392,7 +1505,7 @@ let Forms = () => {
               </div>
               <div className="form_group">
                 <label htmlFor="serviceSummary">Service Summary</label>
-                <textarea
+                {/* <textarea
                   name="serviceSummary"
                   id=""
                   cols="30"
@@ -1400,7 +1513,13 @@ let Forms = () => {
                   placeholder="Write something about this service"
                   value={serviceSummary}
                   onChange={(e) => setServiceSummary(e.target.value)}
-                ></textarea>
+                ></textarea> */}
+                <Editor
+                  placeholder="Start Typing..."
+                  value={serviceSummary}
+                  onTextChange={(e) => setServiceSummary(e.htmlValue)}
+                  style={{ height: "100px" }}
+                />
               </div>
 
               {ServiceEdit === true ? (
@@ -1484,7 +1603,7 @@ let Forms = () => {
 
               <div className="form_group">
                 <label htmlFor="productSummary">Product UseCase Summary</label>
-                <textarea
+                {/* <textarea
                   name="productSummary"
                   id=""
                   cols="30"
@@ -1492,7 +1611,13 @@ let Forms = () => {
                   placeholder="Write something about this Product"
                   value={productSummary}
                   onChange={(e) => setProductSummary(e.target.value)}
-                ></textarea>
+                ></textarea> */}
+                <Editor
+                  placeholder="Start Typing..."
+                  value={productSummary}
+                  onTextChange={(e) => setProductSummary(e.htmlValue)}
+                  style={{ height: "100px" }}
+                />
               </div>
 
               {ProductEdit === true ? (
@@ -1660,7 +1785,7 @@ let Forms = () => {
                   onChange={(e) => setTwiter(e.target.value)}
                 />
               </div>
-              {SocialMediaEdit === true ? (
+              {SocialMediaData.length >=1 ? (
                 <div className="form_submit">
                   <button onClick={handleSocialMediaFormEdit}>
                     Update{loader3 ? <span className="loader3"></span> : ""}
@@ -1743,7 +1868,7 @@ let Forms = () => {
               </div>
               <div className="form_group">
                 <label htmlFor="clientSummary">Client Feed Back</label>
-                <textarea
+                {/* <textarea
                   name="clientSummary"
                   id=""
                   cols="30"
@@ -1751,7 +1876,13 @@ let Forms = () => {
                   placeholder="Paste out client feedback details"
                   value={clientFeedback}
                   onChange={(e) => setClientFeedback(e.target.value)}
-                ></textarea>
+                ></textarea> */}
+                <Editor
+                  placeholder="Start Typing..."
+                  value={clientFeedback}
+                  onTextChange={(e) => setClientFeedback(e.htmlValue)}
+                  style={{ height: "100px" }}
+                />
               </div>
 
               {TestimonialEdit === true ? (
@@ -1830,7 +1961,7 @@ let Forms = () => {
         GalleryData.length >= 1 &&
         TestimonialData.length >= 1 ? (
           <div className="final_digiCard">
-            <Link to={`/${id ? id.user : ""}`} target="_blank">
+            <Link to={`/${user.user}`} target="_blank">
               <i className="bx bxs-hand-right bx-flashing"></i>Get Your Digital
               Card
             </Link>

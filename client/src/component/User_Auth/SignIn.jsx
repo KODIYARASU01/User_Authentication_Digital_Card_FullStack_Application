@@ -52,14 +52,14 @@ const SignIn = () => {
     setLoader(true);
     await axios
       .post(
-        "https://user-authentication-fullstack-application.onrender.com/auth/login",
+        "http://localhost:3001/auth/login",
         data
       )
       .then((res) => {
         const datas = JSON.stringify({
           token: res?.data?.Token,
           id: res?.data?.User["_id"],
-          user:res?.data?.User["firstName"]
+          user: res?.data?.User["firstName"],
         });
         localStorage.setItem("token", datas);
         toast.success(res.data.message, {

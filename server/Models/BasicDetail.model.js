@@ -24,8 +24,9 @@ let BasiDetailSchema = new mongoose.Schema(
     summary: {
       type: String,
     },
-
-
+    userToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

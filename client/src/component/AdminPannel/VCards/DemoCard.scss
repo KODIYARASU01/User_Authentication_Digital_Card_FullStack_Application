@@ -29,7 +29,16 @@
       width: 100%;
       height: auto;
       // padding: 1rem 0px;
+      .svg_top {
+        position: absolute;
+        top: 15%;
+        z-index: 600;
 
+        @media screen and (max-width: 700px) {
+          position: absolute;
+          bottom: -7%;
+        }
+      }
       .box_2_edit {
         position: absolute;
         top: 30%;
@@ -70,15 +79,17 @@
           }
         }
 
+ 
+
         .logo {
           position: absolute;
           left: 12%;
-          top: 67%;
+          top: 59%;
           z-index: 800;
 
           img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center;
@@ -86,19 +97,11 @@
           }
         }
       }
-      .svg_top {
-        position: absolute;
-        top: 14%;
-        z-index: 600;
-
-        @media screen and (max-width: 700px) {
-          position: absolute;
-          bottom: -7%;
-        }
-      }
+   
       .basic_details {
-        padding: 4rem 0.2rem 1rem 0.2rem;
-
+        // padding: 4rem 0.2rem 1rem 0.2rem;
+position: relative;
+     
         .author_name {
           margin-left: 1.8rem;
 
@@ -462,6 +465,7 @@
       min-height: 300px;
       height: 300px;
       display: flex;
+      margin-top: 5rem;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
@@ -469,7 +473,7 @@
 
 
       .svg_top {
-        position: relative;
+        position: absolute;
         top: -35%;
       }
       .qrCode_container {
@@ -572,8 +576,8 @@
 
           img {
             border-radius: 1rem;
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             object-fit: cover;
             object-position: center;
           }
@@ -810,11 +814,16 @@
       min-height: 300px;
       height: 300px;
       display: flex;
+      margin-top: 3rem;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       position: relative;
 
+      .testimonial_wave{
+        position: absolute;
+        top: -27%;
+      }
       .testimonial_container {
         width: 100%;
         position: relative;
@@ -840,7 +849,7 @@
             align-items: center;
             justify-content: center;
             gap: 2rem;
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: white;
 
             letter-spacing: 3px;
@@ -979,6 +988,7 @@
             margin: 10px auto;
 
             input[type="text"] {
+              border: transparent;
               width: 90%;
               padding: 10px 3rem;
               outline: none;
@@ -1106,6 +1116,7 @@
 
               input {
                 width: 90%;
+                border: transparent;
                 padding: 10px 3rem;
                 outline: none;
                 background: transparent;
